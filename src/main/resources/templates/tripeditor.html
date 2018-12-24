@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Theme Made By www.w3schools.com - No Copyright -->
+<title>Bootstrap Theme Company Page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css" />
+
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" />
+
+<link href="../static/css/FileOne.css" th:href="@{/css/FileOne.css}"
+	rel="stylesheet" />
+<style>
+.form-select-vidconvert {
+	border-radius: 18px;
+}
+
+#pics {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#pics td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#pics tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#pics tr:hover {
+	background-color: #ddd;
+}
+
+#pics th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+</style>
+
+<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar"
+	data-offset="60">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#myPage">Logo</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#about">ABOUT</a></li>
+					<li><a href="#services">SERVICES</a></li>
+					<li><a href="#portfolio">PORTFOLIO</a></li>
+					<li><a href="#pricing">PRICING</a></li>
+					<li><a href="#contact">CONTACT</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron text-center">
+		<h1>AllTrip</h1>
+		<p>Trip Editor</p>
+		<form th:action="@{/web/selecttrip}" th:object="${selectedTrOption}"
+			class="form-inline" method="post" enctype="multipart/form-data">
+			<div class="input-group">
+				<div class="form-group blu-margin">
+					<select class="form-control" th:name="nameoftrip">
+						<option th:each="user : ${trips}" th:value="${user.idtrip}"
+							th:text="${user.nameCompat()}"
+							th:selected="${session.requestedTrip.idtrip == user.idtrip}"></option>
+					</select>
+				</div>
+
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-danger">Submit user</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Container (About Section) -->
+	<div id="about" class="container-fluid">
+		<div class="row">
+
+			<div class="col-sm-4">
+				<h2>Select sight</h2>
+				<br>
+				<h4>In <span th:text="${session.requestedTrip.city.cityName}"></span> of the trip on <span th:text="${#dates.format(session.requestedTrip.tripDate, 'dd-MM-yyyy')}"></span></h4>
+				<br>
+				<form th:action="@{/web/selectsight}" th:object="${fooOption}"
+					class="form-inline" method="post" enctype="multipart/form-data">
+					<div>
+
+						<label for="Inputsight">sight</label> <select
+							class="form-control form-select-vidconvert" required
+							th:name="nameofsight">
+
+							<optgroup label="registered sights in trip">
+								<option value="-1">Select sight</option>
+								<option th:each="user : ${session.sights}"
+									th:value="${user.idsightseeings}" th:text="${user}"
+									th:selected="${session.requestedSight.idsightseeings == user.idsightseeings}"></option>
+
+							</optgroup>
+
+							<optgroup label="new sights from city">
+								<option value="-1">Select sight</option>
+								<option th:each="user : ${session.sights2}"
+									th:value="${user.idsightseeings}" th:text="${user}"
+									th:selected="${session.requestedSight.idsightseeings == user.idsightseeings}"></option>
+
+							</optgroup>
+
+						</select>
+
+					</div>
+
+
+					<!--   <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+      <li role="presentation" class="dropdown-header">>new sights from city</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+    </ul>
+  </div> -->
+					<br>
+					<button class="btn btn-default btn-lg"  name="action" value="slct" type="submit">select
+						sight</button>
+					<button type="submit" name="action" value="dltsight"
+						class="btn btn-default btn-lg">delete sight from trip</button>
+					<button type="submit" name="action" value="dltsightcity"
+						class="btn btn-default btn-link">delete sight from city
+						also</button>
+				</form>
+			</div>
+
+			<form th:action="@{/web/addnewsight}" method="post" enctype="multipart/form-data">
+				<div class="col-sm-4">
+					<h2>Add sight</h2>
+					<br>
+					<h4>To the trip to <span th:text="${session.requestedTrip.city.cityName}"></span> on the <span th:text="${#dates.format(session.requestedTrip.tripDate, 'dd-MM-yyyy')}"></span></h4>
+					<br>
+					<p>
+						<label for="nameofsight">sight</label> <input class="form-control"
+							id="nameofsight" name="nameofsight" placeholder="sight" type="text" required>
+						
+					</p>
+
+					<br>
+					<button class="btn btn-default btn-lg">add sight</button>
+				</div>
+
+				<div class="col-sm-4">
+					<span class="glyphicon glyphicon-signal logo"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="container-fluid bg-grey">
+		<div class="row">
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-globe logo slideanim"></span>
+			</div>
+			<div class="col-sm-8">
+				<h2>
+					<input type="hidden" id="sightattr" name="sightattr"
+						value=${session.requestedSight}
+						th:attr="data-my-func-attr=${session.requestedSight}" /> Add
+					pictures to sight - sight name: <b
+						th:text="${session.requestedSight}"></b>
+				</h2>
+				<br>
+				<h4>
+					<strong>Picture</strong> <label for="Inputname"> location
+						Address</label> <input class="form-control" id="sightpic" name="sight"
+						placeholder="pic address" type="text" required>
+					<button class="btn btn-default btn-link" id="add_new">add
+						picture</button>
+					<button class="btn btn-default btn-link" id="list">ListItems</button>
+					<button class="btn btn-default btn-link" id="clear">ClearList</button>
+					<button class="btn btn-default btn-link" id="forsitelist">listpicsforsite</button>
+
+
+				</h4>
+			</div>
+
+		</div>
+
+
+
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			var trsiid1  = [[${session.requestedtrSight}]];
+			+]*/
+
+			
+			
+			
+			$("#forsitelist")
+			.click(
+					function() {
+
+						$
+								.ajax({
+									type : "GET",
+									url : "/web/check1",
+									data : {
+										"id" : trsiid1
+									},
+									success : function(data) {
+										var a = "<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>";
+
+										for (var i = 0; i < data.length; i++) {
+											var tds = '<tr><td>'
+													+ (i + 1)
+													+ '.</td><td> '
+													+ data[i].trs
+													+ "</td><td> "
+													+ data[i].addr
+													+ '</td><td><button class="btn btn-default btn-link" name="a" id="listdel" data-other-attr='
+													+ i
+													+ ' >remove</button></td></tr>';
+
+											a += tds
+										}
+										a += "</table>";
+										$('#tbl').html(a);
+
+									}
+								});
+
+					});
+
+
+			/*]]>*/
+		</script>
+
+
+
+
+
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			var trsiid  = [[${session.requestedtrSight}]];
+			+]*/
+
+			$("#list")
+					.click(
+							function() {
+
+								$
+										.ajax({
+											type : "GET",
+											url : "/web/check",
+											data : {
+												"id" : trsiid
+											},
+											success : function(data) {
+												var a = "<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>";
+
+												for (var i = 0; i < data.length; i++) {
+													var tds = '<tr><td>'
+															+ (i + 1)
+															+ '.</td><td> '
+															+ data[i].trs
+															+ "</td><td> "
+															+ data[i].addr
+															+ '</td><td><button class="btn btn-default btn-link" name="b" id="listdel" data-other-attr='
+															+ i
+															+ ' >remove</button></td></tr>';
+
+													a += tds
+												}
+												a += "</table>";
+												$('#tbl').html(a);
+
+											}
+										});
+
+							});
+			
+			
+			
+			
+			
+			
+			
+
+
+			/*]]>*/
+		</script>
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			var user  = [[${session.requestedtrSight}]];
+			+]*/
+
+
+			
+			$("#add_new").click(function() {
+
+				$.ajax({
+					url : '/web/addpic',
+					type : 'POST',
+					contentType : 'application/json',
+					data : JSON.stringify({
+						addr : $("#sightpic").val(),
+						trs : user
+					}),
+					dataType : 'json'
+				});
+			});
+			
+			
+			
+			
+			$('body').on("click","#listdel" , function()  {
+				var q=$(this).attr('name');
+			var w=$(this).attr('data-other-attr');
+				$.ajax({
+					url : '/web/removepic',
+					type : 'GET',
+					
+					data : {				
+						"name" : q,
+						"attr" : w
+				},
+				});
+			});
+			/*]]>*/
+		</script>
+
+
+
+
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			var user  = [[${session.requestedtrSight}]];
+			+]*/
+
+			$("#clear").click(function() {
+
+				$.ajax({
+					url : '/web/clearpiclist',
+					type : 'GET',
+					data : {
+						"id" : 1
+					}
+					
+				});
+			});
+			
+			
+			$("#sbmttodb").click(function() {
+
+				$.ajax({
+					url : '/web/dbsbmt',
+					type : 'GET',
+					data : {
+					
+					}
+					
+				});
+			});
+			
+
+			/*]]>*/
+		</script>
+
+
+
+
+		<div class="row">
+			<div class="col-sm-4">
+
+				<strong>Picture added:</strong>
+			</div>
+			<div class="col-sm-6" id='tbl'></div>
+			<div class="col-sm-2">
+				<button class="btn btn-default btn-info" id="sbmttodb">submit to db</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			+]*/
+
+
+			
+			$("#sbmttodb").click(function() {
+
+				$.ajax({
+					url : '/web/dbsbmt',
+					type : 'GET',
+					data : {
+					
+					}
+					
+				});
+			});
+			
+
+			/*]]>*/
+		</script>
+
+
+	<!-- Container (Services Section) -->
+	
+		<form th:action="@{/web/delcity}" 
+		class="form-inline" method="post" enctype="multipart/form-data" th:object="${City1}">
+		<div id="services" class="container-fluid text-center">
+			<h2>SERVICES</h2>
+			<h4>Delete City</h4>
+			<br>
+
+			<div class="row slideanim">
+<!-- 			<div class="col-sm-4">
+					<span class="glyphicon glyphicon-tower logo-small"></span>
+					<h4>Delete</h4>
+					<label for="Name2">hotel</label> <input type="text"
+						class="form-control" id="hotel" placeholder="hotel name" />
+
+				</div> -->
+
+				<div class="col-sm-4">
+
+
+					<span class="glyphicon glyphicon-tower logo-small"></span>
+					<h4>This</h4>
+
+					<label for="Inputselect">city</label>
+					<div class="input-group">
+						<div class="form-group blu-margin">
+							<select class="form-control" th:name="city"  th:value="city" th:field="*{cityName}" >
+								<option th:each="user : ${cities}" th:value="${user.idcities}" 
+									th:text="${user.cityName}"></option>
+							</select>
+						</div>
+
+
+					</div>
+				</div>
+	
+				<div class="col-sm-8">
+					<span class="glyphicon glyphicon-tower logo-small"></span>
+				<h4>change travler</h4>
+						<label for="Name2">traveler</label> <input type="text"
+						class="form-control" id="budget" placeholder="enter money spent" />
+
+				</div>
+			</div>
+		<div class="container-fluid text-center">
+			<button type="submit" class="btn btn-lg btn-success">Submit
+				Information</button>
+		</div>
+
+		</div>
+
+
+	</form>
+
+
+
+<div>
+
+
+
+
+	<form th:action="@{/web/updatetrip}" th:object="${requestedTrip}"
+		class="form-inline" method="Post" enctype="multipart/form-data">
+
+		<div id="services1" class="container-fluid text-center ">
+			<h2>SERVICES</h2>
+			<h4>add a trip</h4>
+			<br>
+
+			<div class="row slideanim">
+
+
+				<div class="col-sm-4">
+
+
+					<span class="glyphicon glyphicon-tower logo-small"></span>
+					<h4>City</h4>
+
+					<label for="Inputselect">city</label>
+					<div class="input-group">
+						<div class="form-group blu-margin">
+							<select class="form-control"  th:field="*{city}">
+								<option th:each="user : ${cities}" th:value="${user.idcities}"
+									th:text="${user.cityName}" th:selected="${requestedTrip.city.idcities == user.idcities}"></option>
+							</select>
+						</div>
+
+
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<span class="glyphicon glyphicon-glass logo-small"></span>
+					<h4>hotel</h4>
+					<label for="Name2">hotel</label> <input type="text"
+						class="form-control" id="hotel" placeholder="hotel name" th:value="${requestedTrip.tripHotel}" th:field="*{tripHotel}"/>
+
+				</div>
+				<div class="col-sm-4">
+					<span class="glyphicon glyphicon-euro logo-small"></span>
+					<h4>budget</h4>
+					<label for="Name2">budget</label> <input type="text"
+						class="form-control" id="budget"  th:value="${requestedTrip.tripMoneyspent}" placeholder="enter money spent" th:field="*{tripMoneyspent}"/>
+
+				</div>
+			</div>
+			<br /> <br />
+			<div class="row slideanim">
+				<div class="col-sm-4">
+					<span class="glyphicon glyphicon-time logo-small"></span>
+					<h4>date</h4>
+					<label for="Name2">date</label> <input type="date"   
+						class="form-control" id="date" th:value="${requestedTrip.tripDate}" th:placeholder="yyyy-mm-dd" th:field="*{{tripDate}}"/>
+
+				</div>
+				<div class="col-sm-4">
+					<span class="glyphicon glyphicon-calendar logo-small"></span>
+					<h4>duration</h4>
+					<label for="Name2">number of days</label> <input type="text"
+						class="form-control" id="duration" th:value="${requestedTrip.tripNumdays}" placeholder="number of days" th:field="*{tripNumdays}"/>
+
+				</div>
+				<div class="col-sm-4">
+					<span class="glyphicon glyphicon-road logo-small"></span>
+					<h4>transit time</h4>
+					<label for="Name2">transit time</label> <input type="text"
+						class="form-control" id="transit" th:value="${requestedTrip.tripNummintransit}" placeholder="enter transit time" th:field="*{tripNummintransit}"/>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="container-fluid text-center">
+			<button type="submit" class="btn btn-lg btn-success">Submit
+				Information</button>
+		</div>
+	</form>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+	<!-- Add Google Maps -->
+	<div id="googleMap" style="height: 400px; width: 100%;"></div>
+	<script>
+		function myMap() {
+			var myCenter = new google.maps.LatLng(41.878114, -87.629798);
+			var mapProp = {
+				center : myCenter,
+				zoom : 12,
+				scrollwheel : false,
+				draggable : false,
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(document.getElementById("googleMap"),
+					mapProp);
+			var marker = new google.maps.Marker({
+				position : myCenter
+			});
+			marker.setMap(map);
+		}
+	</script>
+
+
+
+
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwHq23WcDuRdLYKkxKC-fqeGB4LWtlQD8&callback=myMap"></script>
+	<!--
+To use this code on your website, get a free API key from Google.
+Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+-->
+
+	<footer class="container-fluid text-center">
+		<a href="#myPage" title="To Top"> <span
+			class="glyphicon glyphicon-chevron-up"></span>
+		</a>
+		<p>
+			Bootstrap Theme Made By <a href="https://www.w3schools.com"
+				title="Visit w3schools">www.w3schools.com</a>
+		</p>
+	</footer>
+
+	<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+	<script>
+		$(document).ready(
+
+				function() {
+					// Add smooth scrolling to all links in navbar + footer link
+					$(".navbar a, footer a[href='#myPage']").on('click',
+							function(event) {
+								// Make sure this.hash has a value before overriding default behavior
+								if (this.hash !== "") {
+									// Prevent default anchor click behavior
+									event.preventDefault();
+
+									// Store hash
+									var hash = this.hash;
+
+									// Using jQuery's animate() method to add smooth page scroll
+									// The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+									$('html, body').animate({
+										scrollTop : $(hash).offset().top
+									}, 900, function() {
+
+										// Add hash (#) to URL when done scrolling (default click behavior)
+										window.location.hash = hash;
+									});
+								} // End if
+							});
+
+					$(window).scroll(function() {
+						$(".slideanim").each(function() {
+							var pos = $(this).offset().top;
+
+							var winTop = $(window).scrollTop();
+							if (pos < winTop + 600) {
+								$(this).addClass("slide");
+							}
+						});
+					});
+				});
+	</script>
+</body>
+</html>

@@ -127,32 +127,33 @@ public class MultiHttpSecurityConfig {
 	                .passwordEncoder(bCryptPasswordEncoder);
 	    }
 	    
-    
+	    
+//	    @Override
+//	    protected void configure(HttpSecurity httpSecurity) throws Exception {
+//	        httpSecurity.antMatcher("/**").csrf().disable().cors().and()
+//			  .authorizeRequests().antMatchers("/").permitAll();}
+//	        
+//	        //
+//	        
 	    @Override
-	    protected void configure(HttpSecurity httpSecurity) throws Exception {
-	        httpSecurity.antMatcher("/**").csrf().disable().cors().and()
-			  .authorizeRequests().antMatchers("/").permitAll();}       
-	        //
-	        
-/*/*///	    @Override
-//	    protected void configure(HttpSecurity http) throws Exception {
-//
-//	        http.antMatcher("/web/**").
-//	                authorizeRequests()
-//	                .antMatchers("/").permitAll()
-//	                .antMatchers("/web/login").permitAll()
-//	                .antMatchers("/web/registration").permitAll()
-//	                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-//	                .authenticated().and().csrf().disable().formLogin()
-//	                .loginPage("/web/login").failureUrl("/login?error=true")
-//	                .defaultSuccessUrl("/web/main")
-//	                .usernameParameter("email")
-//	                .passwordParameter("password")
-//	                .and().logout()
-//	                .logoutRequestMatcher(new AntPathRequestMatcher("/web/logout"))
-//	                .logoutSuccessUrl("/web").and().exceptionHandling()
-//	                .accessDeniedPage("/access-denied");
-//	    }
+	    protected void configure(HttpSecurity http) throws Exception {
+
+	        http.antMatcher("/web/**").
+	                authorizeRequests()
+	                .antMatchers("/").permitAll()
+	                .antMatchers("/web/login").permitAll()
+	                .antMatchers("/web/registration").permitAll()
+	                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+	                .authenticated().and().csrf().disable().formLogin()
+	                .loginPage("/web/login").failureUrl("/login?error=true")
+	                .defaultSuccessUrl("/web/main")
+	                .usernameParameter("email")
+	                .passwordParameter("password")
+	                .and().logout()
+	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	                .logoutSuccessUrl("/web").and().exceptionHandling()
+	                .accessDeniedPage("/access-denied");
+	    }
 
 	    @Override
 	    public void configure(WebSecurity web) throws Exception {

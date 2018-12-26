@@ -65,11 +65,38 @@ public class MultiHttpSecurityConfig {
 		      source.registerCorsConfiguration("/rest/", config);
 		      return source;
 		}	
-		
-		@Autowired
-		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-			auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-		}
+
+		  
+		  
+		  @Autowired
+		    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+		    @Autowired
+		    private DataSource dataSource;
+
+		    @Value("${spring.queries.users-query}")
+		    private String usersQuery;
+
+		    @Value("${spring.queries.roles-query}")
+		    private String rolesQuery;
+
+		    @Override
+		    protected void configure(AuthenticationManagerBuilder auth)
+		            throws Exception {
+		        auth.
+		                jdbcAuthentication()
+		                .usersByUsernameQuery(usersQuery)
+		                .authoritiesByUsernameQuery(rolesQuery)
+		                .dataSource(dataSource)
+		                .passwordEncoder(bCryptPasswordEncoder);
+		    }
+		    
+		  
+		  
+//		@Autowired
+//		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//			auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+//		}
 
   }    
 
@@ -101,13 +128,13 @@ public class MultiHttpSecurityConfig {
 	    }
 	    
 	    
-	    @Override
-	    protected void configure(HttpSecurity httpSecurity) throws Exception {
-	        httpSecurity.antMatcher("/**").csrf().disable().cors().and()
-			  .authorizeRequests().antMatchers("/").permitAll();}
-	        
-	        //
-	   /*     
+//	    @Override
+//	    protected void configure(HttpSecurity httpSecurity) throws Exception {
+//	        httpSecurity.antMatcher("/**").csrf().disable().cors().and()
+//			  .authorizeRequests().antMatchers("/").permitAll();}
+//	        
+//	        //
+//	        
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 
@@ -123,10 +150,10 @@ public class MultiHttpSecurityConfig {
 	                .usernameParameter("email")
 	                .passwordParameter("password")
 	                .and().logout()
-	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	                .logoutRequestMatcher(new AntPathRequestMatcher("/web/logout"))
 	                .logoutSuccessUrl("/web").and().exceptionHandling()
 	                .accessDeniedPage("/access-denied");
-	    }*/
+	    }
 
 	    @Override
 	    public void configure(WebSecurity web) throws Exception {

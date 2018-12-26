@@ -19,7 +19,7 @@ public interface PicRepository extends JpaRepository<Pic, Integer> {
 	@Query("SELECT a ,d FROM Pic a Join a.tripSightseeing b Join b.trip c Join c.city d GROUP BY d ORDER BY COUNT(d) Desc ")
 	List<Object[]> findFrontPics(Pageable pageable);
 	
-	
+	List<Pic> findAllBytripSightseeingIdtripSightseeing(int id);
 	List<Pic> findTop5ByTripSightseeingTripCityIdcities(int cityid);
 
 	        

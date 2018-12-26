@@ -121,8 +121,8 @@ public class MultiHttpSecurityConfig {
 	            throws Exception {
 	        auth.
 	                jdbcAuthentication()
-	                .usersByUsernameQuery(usersQuery)
-	                .authoritiesByUsernameQuery(rolesQuery)
+	                .usersByUsernameQuery("select email, password, active from user1 where email=?")
+	                .authoritiesByUsernameQuery("select u.email, r.role from user1 u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?")
 	                .dataSource(dataSource)
 	                .passwordEncoder(bCryptPasswordEncoder);
 	    }

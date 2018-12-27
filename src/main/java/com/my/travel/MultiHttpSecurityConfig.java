@@ -24,6 +24,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.my.travel.components.UserDetailServiceImpl;
+
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MultiHttpSecurityConfig {
@@ -131,6 +133,8 @@ public class MultiHttpSecurityConfig {
   @Configuration  
   @Order(1)    //   4
   public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+	  @Autowired
+		private UserDetailServiceImpl userDetailsService;
 
 	  @Autowired
 	    private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -150,10 +154,18 @@ public class MultiHttpSecurityConfig {
 	        auth.
 	                jdbcAuthentication() 
 	                .dataSource(dataSource)
-	                .usersByUsernameQuery("select email, password, active from user1 where email=?")
-	                .authoritiesByUsernameQuery("select u.email, r.role from user1 u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?")
+	                .usersByUsernameQuery(usersQuery)
+	                .authoritiesByUsernameQuery(rolesQuery)
 	                .passwordEncoder(bCryptPasswordEncoder);
 	    }
+	    
+	    
+//	    @Override
+//		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//			auth.jdbcAuthentication().usersByUsernameQuery(usersQuery).authoritiesByUsernameQuery(rolesQuery)
+//					.dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
+//		}
+
 	    
 	    
 //	    @Override

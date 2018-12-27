@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travel.model2.User1;
+import com.my.travel.service.OriginServ;
 import com.my.travel.service.UserService;
 
 @Controller
@@ -21,7 +22,12 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private OriginServ originServ;
+    
+//    
+//    @Autowired
+//    private UserRepository userRepository
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView();
@@ -29,15 +35,15 @@ public class LoginController {
         return modelAndView;
     }
 
-    @ModelAttribute("user")
+    @ModelAttribute("user1")
     public User1 getUserForm() {
         return new User1();
     }
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
-        User1 user = new User1();
-        modelAndView.addObject("user1", user);
+       // User1 user = new User1();
+       // modelAndView.addObject("user1", user);
         modelAndView.setViewName("registration");
         return modelAndView;
     }
@@ -56,7 +62,7 @@ public class LoginController {
         } else {
             userService.saveUser(user1);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new User1());
+           // modelAndView.addObject("user", new User1());
             modelAndView.setViewName("registration");
 
         }

@@ -36,35 +36,35 @@ public class MultiHttpSecurityConfig {
 //  }
 	
 	
-	
-	  @Autowired
-	    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	    @Autowired
-	    private DataSource dataSource;
-
-	    @Value("${spring.queries.users-query}")
-	    private String usersQuery;
-
-	    @Value("${spring.queries.roles-query}")
-	    private String rolesQuery;
-
-	    @Autowired
-	  public void configureGlobal(AuthenticationManagerBuilder auth)
-	            throws Exception {
-	        auth.
-	                jdbcAuthentication()
-	                .usersByUsernameQuery(usersQuery)
-	                .authoritiesByUsernameQuery(rolesQuery)
-	                .dataSource(dataSource)
-	                .passwordEncoder(bCryptPasswordEncoder);
-	    }
+//	
+//	  @Autowired
+//	    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//
+//	    @Autowired
+//	    private DataSource dataSource;
+//
+//	    @Value("${spring.queries.users-query}")
+//	    private String usersQuery;
+//
+//	    @Value("${spring.queries.roles-query}")
+//	    private String rolesQuery;
+//
+//	    @Autowired
+//	  public void configureGlobal(AuthenticationManagerBuilder auth)
+//	            throws Exception {
+//	        auth.
+//	                jdbcAuthentication()
+//	                .usersByUsernameQuery(usersQuery)
+//	                .authoritiesByUsernameQuery(rolesQuery)
+//	                .dataSource(dataSource)
+//	                .passwordEncoder(bCryptPasswordEncoder);
+//	    }
 
   @Configuration
   @Order(2)                                                       // 2
   public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-//	  @Autowired
-//		private com.my.travel.components.UserDetailServiceImpl userDetailsService; 
+	  @Autowired
+		private com.my.travel.components.UserDetailServiceImpl userDetailsService; 
 
 		  @Override
 		  protected void configure(HttpSecurity http) throws Exception {
@@ -121,10 +121,10 @@ public class MultiHttpSecurityConfig {
 		    
 		  
 		  
-//		@Autowired
-//		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//			auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-//		}
+		@Autowired
+		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+			auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+		}
 
   }    
 
@@ -148,10 +148,10 @@ public class MultiHttpSecurityConfig {
 	    protected void configure(AuthenticationManagerBuilder auth)
 	            throws Exception {
 	        auth.
-	                jdbcAuthentication()
+	                jdbcAuthentication() 
+	                .dataSource(dataSource)
 	                .usersByUsernameQuery("select email, password, active from user1 where email=?")
 	                .authoritiesByUsernameQuery("select u.email, r.role from user1 u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?")
-	                .dataSource(dataSource)
 	                .passwordEncoder(bCryptPasswordEncoder);
 	    }
 	    

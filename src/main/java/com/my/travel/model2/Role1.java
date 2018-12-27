@@ -13,8 +13,8 @@ public class Role1 {
     private int id;
     @Column(name = "role")
     private String role;
-    public Role1(String r) {
-    	this.role=r;
-		// TODO Auto-generated constructor stub
-	}
+//    public Role1(String r) {
+//    	this.role=r;
+//		// TODO Auto-generated constructor stub
+//	}
 }

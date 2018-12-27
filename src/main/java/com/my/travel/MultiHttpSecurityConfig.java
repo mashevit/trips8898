@@ -63,8 +63,8 @@ public class MultiHttpSecurityConfig {
   @Configuration
   @Order(2)                                                       // 2
   public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-	  @Autowired
-		private com.my.travel.components.UserDetailServiceImpl userDetailsService; 
+//	  @Autowired
+//		private com.my.travel.components.UserDetailServiceImpl userDetailsService; 
 
 		  @Override
 		  protected void configure(HttpSecurity http) throws Exception {

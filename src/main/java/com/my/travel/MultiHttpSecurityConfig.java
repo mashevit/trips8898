@@ -11,26 +11,30 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-@EnableWebSecurity
+@Configuration
+@EnableWebMvcSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MultiHttpSecurityConfig {
-  @Autowired
-  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { //1
-      auth
-          .inMemoryAuthentication()
-              .withUser("user").password("password").roles("USER").and()
-              .withUser("admin").password("password").roles("USER", "ADMIN");
-  }
+//  @Autowired
+//  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { //1
+//      auth
+//          .inMemoryAuthentication()
+//              .withUser("user").password("password").roles("USER").and()
+//              .withUser("admin").password("password").roles("USER", "ADMIN");
+//  }
 
   @Configuration
   @Order(2)                                                       // 2
@@ -138,7 +142,7 @@ public class MultiHttpSecurityConfig {
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 
-	        http.antMatcher("/web/**").
+	    	http.requestMatcher(new NegatedRequestMatcher(new AntPathRequestMatcher("/rest/**"))).
 	                authorizeRequests()
 	                .antMatchers("/").permitAll()
 	                .antMatchers("/web/login").permitAll()

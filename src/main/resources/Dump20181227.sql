@@ -36,7 +36,7 @@
 
 LOCK TABLES `traveler` WRITE;
 /*!40000 ALTER TABLE `traveler` DISABLE KEYS */;
-INSERT INTO `traveler` VALUES (2,'Ilia Mahsevitzky','1986-01-08'),(3,'Trav Aller','1983-07-02');
+INSERT INTO `traveler` VALUES (2,'Ilia Mahsevitzky','09-01-1986'),(3,'Trav Aller','08-01-1986');
 /*!40000 ALTER TABLE `traveler` ENABLE KEYS */;
 UNLOCK TABLES;
 

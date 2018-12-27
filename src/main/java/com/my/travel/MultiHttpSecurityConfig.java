@@ -25,7 +25,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
-@EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MultiHttpSecurityConfig {
 //  @Autowired
@@ -35,6 +34,31 @@ public class MultiHttpSecurityConfig {
 //              .withUser("user").password("password").roles("USER").and()
 //              .withUser("admin").password("password").roles("USER", "ADMIN");
 //  }
+	
+	
+	
+	  @Autowired
+	    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	    @Autowired
+	    private DataSource dataSource;
+
+	    @Value("${spring.queries.users-query}")
+	    private String usersQuery;
+
+	    @Value("${spring.queries.roles-query}")
+	    private String rolesQuery;
+
+	    @Autowired
+	  public void configureGlobal(AuthenticationManagerBuilder auth)
+	            throws Exception {
+	        auth.
+	                jdbcAuthentication()
+	                .usersByUsernameQuery(usersQuery)
+	                .authoritiesByUsernameQuery(rolesQuery)
+	                .dataSource(dataSource)
+	                .passwordEncoder(bCryptPasswordEncoder);
+	    }
 
   @Configuration
   @Order(2)                                                       // 2
@@ -142,7 +166,7 @@ public class MultiHttpSecurityConfig {
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 
-	    	http.requestMatcher(new NegatedRequestMatcher(new AntPathRequestMatcher("/rest/**"))).
+	    	http.antMatcher("/web/**").
 	                authorizeRequests()
 	                .antMatchers("/").permitAll()
 	                .antMatchers("/web/login").permitAll()

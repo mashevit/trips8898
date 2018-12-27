@@ -77,9 +77,9 @@ CREATE TABLE `pics` (
   PRIMARY KEY (`IDPICS`),
   KEY `FK_pics_picsTripOrSight` (`picsTripOrSight`),
   KEY `FKowncomhxr92bfmab5pj9gqw2m` (`pics_trip_or_sight`),
-  CONSTRAINT `FK_pics_picsTripOrSight` FOREIGN KEY (`picsTripOrSight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`),
-  CONSTRAINT `FKowncomhxr92bfmab5pj9gqw2m` FOREIGN KEY (`pics_trip_or_sight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`),
-  CONSTRAINT `FKrr9xahtlxvydufkqp6qkly6ha` FOREIGN KEY (`picsTripOrSight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`)
+  CONSTRAINT `6FK_pics_picsTripOrSight` FOREIGN KEY (`picsTripOrSight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`),
+  CONSTRAINT `7FKowncomhxr92bfmab5pj9gqw2m` FOREIGN KEY (`pics_trip_or_sight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`),
+  CONSTRAINT `8FKrr9xahtlxvydufkqp6qkly6ha` FOREIGN KEY (`picsTripOrSight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`)
 ) ENGINE=InnoDB AUTO_INCREMENT=437 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -112,9 +112,9 @@ CREATE TABLE `sightseeings` (
   PRIMARY KEY (`IDSIGHTSEEINGS`),
   KEY `FK_sightseeings_SightSeeingsCityId` (`SightSeeingsCityId`),
   KEY `FKepg275n03y57me1wc0i6tmyby` (`sight_seeings_city_id`),
-  CONSTRAINT `FK_sightseeings_SightSeeingsCityId` FOREIGN KEY (`SightSeeingsCityId`) REFERENCES `cities` (`idcities`),
-  CONSTRAINT `FKepg275n03y57me1wc0i6tmyby` FOREIGN KEY (`sight_seeings_city_id`) REFERENCES `cities` (`idcities`),
-  CONSTRAINT `FKmlm48tw8s0bgydnokipgod2pa` FOREIGN KEY (`SightSeeingsCityId`) REFERENCES `cities` (`idcities`)
+  CONSTRAINT `9FK_sightseeings_SightSeeingsCityId` FOREIGN KEY (`SightSeeingsCityId`) REFERENCES `cities` (`idcities`),
+  CONSTRAINT `FK3epg275n03y57me1wc0i6tmyby` FOREIGN KEY (`sight_seeings_city_id`) REFERENCES `cities` (`idcities`),
+  CONSTRAINT `FK4mlm48tw8s0bgydnokipgod2pa` FOREIGN KEY (`SightSeeingsCityId`) REFERENCES `cities` (`idcities`)
 ) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -168,9 +168,9 @@ CREATE TABLE `trip` (
   PRIMARY KEY (`IDTRIP`),
   KEY `FK_TRIP_Trip_id_traveller` (`Trip_id_traveller`),
   KEY `FK_TRIP_trip_city` (`trip_city`),
-
-  CONSTRAINT `FK_TRIP_Trip_id_traveller` FOREIGN KEY (`Trip_id_traveller`) REFERENCES `traveler` (`idtraveler`),
-  CONSTRAINT `FK_TRIP_trip_city` FOREIGN KEY (`trip_city`) REFERENCES `cities` (`idcities`)
+  CONSTRAINT `1FK6waoclk2qtg3j5774nxyxbctw` FOREIGN KEY (`Trip_id_traveller`) REFERENCES `traveler` (`idtraveler`),
+  CONSTRAINT `2FK_TRIP_Trip_id_traveller` FOREIGN KEY (`Trip_id_traveller`) REFERENCES `traveler` (`idtraveler`),
+  CONSTRAINT `3FK_TRIP_trip_city` FOREIGN KEY (`trip_city`) REFERENCES `cities` (`idcities`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -188,8 +188,8 @@ CREATE TABLE `trip_sightseeing` (
   PRIMARY KEY (`idtrip_sightseeing`),
   KEY `FK_trip_sightseeing_trip_sightseeing_nameid` (`trip_sightseeing_nameid`),
   KEY `FK_trip_sightseeing_trip_sightseeing_tripid` (`trip_sightseeing_tripid`),
-  CONSTRAINT `FK_trip_sightseeing_trip_sightseeing_nameid` FOREIGN KEY (`trip_sightseeing_nameid`) REFERENCES `sightseeings` (`idsightseeings`),
-  CONSTRAINT `FK_trip_sightseeing_trip_sightseeing_tripid` FOREIGN KEY (`trip_sightseeing_tripid`) REFERENCES `trip` (`idtrip`)
+  CONSTRAINT `4FK_trip_sightseeing_trip_sightseeing_nameid` FOREIGN KEY (`trip_sightseeing_nameid`) REFERENCES `sightseeings` (`idsightseeings`),
+  CONSTRAINT `5FK_trip_sightseeing_trip_sightseeing_tripid` FOREIGN KEY (`trip_sightseeing_tripid`) REFERENCES `trip` (`idtrip`)
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

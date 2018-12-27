@@ -20,7 +20,7 @@ USE `travel1`;
 --
 -- Table structure for table `car`
 --
-
+SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `car`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -257,3 +257,4 @@ CREATE TABLE `user_role` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-12-27 22:12:44
+SET FOREIGN_KEY_CHECKS=1;

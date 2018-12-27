@@ -18,20 +18,28 @@
 --
 -- Table structure for table `cities`
 --
-
-DROP TABLE IF EXISTS `cities`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cities` (
-  `IDCITIES` int(11) NOT NULL AUTO_INCREMENT,
-  `city_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`IDCITIES`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
+--DROP TABLE IF EXISTS `cities`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `cities` (
+--  `IDCITIES` int(11) NOT NULL AUTO_INCREMENT,
+--  `city_name` varchar(255) DEFAULT NULL,
+--  PRIMARY KEY (`IDCITIES`)
+--) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+--/*!40101 SET character_set_client = @saved_cs_client */;
+--
+----
 -- Dumping data for table `cities`
 --
+
+
+LOCK TABLES `traveler` WRITE;
+/*!40000 ALTER TABLE `traveler` DISABLE KEYS */;
+INSERT INTO `traveler` VALUES (2,'Ilia Mahsevitzky','1986-01-08'),(3,'Trav Aller','1983-07-02');
+/*!40000 ALTER TABLE `traveler` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 LOCK TABLES `cities` WRITE;
 /*!40000 ALTER TABLE `cities` DISABLE KEYS */;
@@ -39,26 +47,33 @@ INSERT INTO `cities` VALUES (1,'Beer-Sheva'),(2,'Jerusalem'),(3,'Tel-Aviv'),(4,'
 /*!40000 ALTER TABLE `cities` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+LOCK TABLES `trip` WRITE;
+/*!40000 ALTER TABLE `trip` DISABLE KEYS */;
+INSERT INTO `trip` VALUES (1,'2014-10-12','none',300,1,180,2,2),(2,'2016-04-04','none',60,1,45,1,2),(3,'2016-04-07','Kook Suite',2000,2,180,2,2),(4,'2015-10-07','none',55,1,33,1,2),(5,'2016-07-29','tlv88',2300,3,120,3,2),(6,'2016-08-08','none',60,1,30,1,2),(7,'2016-08-31','ana inn hostel',1500,2,180,4,2),(8,'2017-03-06','none',75,1,37,1,2),(9,'2017-03-25','ana inn hostel',1900,3,300,5,2),(10,'2017-06-06','loui inn',1600,3,240,6,2),(11,'2017-07-17','Kook Suite',1800,2,180,2,2),(12,'2017-08-31','ana inn hostel',1400,2,180,4,2),(13,'2017-09-11','ana inn hostel',2450,3,120,3,2),(14,'2018-02-11','Agripas Hotel',1950,3,180,2,2),(15,'2018-04-13','Acco Beach',2220,4,300,7,2),(16,'2018-07-17','CitizenM Bankside',15000,8,780,8,2),(17,'2001-01-22','wdwdwd',211,12,123,1,NULL),(18,'2015-01-23','wdwdwd',211,12,1235,3,NULL),(19,'2017-01-31','wdwdwd1',1221,1,21,6,NULL),(20,'2016-01-31','wdwdwd1',21,2,11,1,NULL),(21,'2001-01-22','wdwdwd',1221,2,12,1,NULL),(22,'2001-01-22','wdwdwd',12,2,1,1,NULL),(23,'2016-01-22','wdw2',12,2,22,1,2),(24,'2016-01-22','wdw2',12,2,22,1,2),(25,'2015-03-21','w3dw233',400,1,30,13,2);
+/*!40000 ALTER TABLE `trip` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `pics`
 --
-
-DROP TABLE IF EXISTS `pics`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pics` (
-  `IDPICS` int(11) NOT NULL AUTO_INCREMENT,
-  `pics_addr` varchar(255) DEFAULT NULL,
-  `picsTripOrSight` int(11) DEFAULT NULL,
-  `pics_trip_or_sight` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IDPICS`),
-  KEY `FK_pics_picsTripOrSight` (`picsTripOrSight`),
-  KEY `FKowncomhxr92bfmab5pj9gqw2m` (`pics_trip_or_sight`),
-  CONSTRAINT `FK_pics_picsTripOrSight` FOREIGN KEY (`picsTripOrSight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`),
-  CONSTRAINT `FKowncomhxr92bfmab5pj9gqw2m` FOREIGN KEY (`pics_trip_or_sight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`),
-  CONSTRAINT `FKrr9xahtlxvydufkqp6qkly6ha` FOREIGN KEY (`picsTripOrSight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`)
-) ENGINE=InnoDB AUTO_INCREMENT=437 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+--DROP TABLE IF EXISTS `pics`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `pics` (
+--  `IDPICS` int(11) NOT NULL AUTO_INCREMENT,
+--  `pics_addr` varchar(255) DEFAULT NULL,
+--  `picsTripOrSight` int(11) DEFAULT NULL,
+--  `pics_trip_or_sight` int(11) DEFAULT NULL,
+--  PRIMARY KEY (`IDPICS`),
+--  KEY `FK_pics_picsTripOrSight` (`picsTripOrSight`),
+--  KEY `FKowncomhxr92bfmab5pj9gqw2m` (`pics_trip_or_sight`),
+--  CONSTRAINT `FK_pics_picsTripOrSight` FOREIGN KEY (`picsTripOrSight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`),
+--  CONSTRAINT `FKowncomhxr92bfmab5pj9gqw2m` FOREIGN KEY (`pics_trip_or_sight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`),
+--  CONSTRAINT `FKrr9xahtlxvydufkqp6qkly6ha` FOREIGN KEY (`picsTripOrSight`) REFERENCES `trip_sightseeing` (`idtrip_sightseeing`)
+--) ENGINE=InnoDB AUTO_INCREMENT=437 DEFAULT CHARSET=latin1;
+--/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `pics`
@@ -73,16 +88,16 @@ UNLOCK TABLES;
 --
 -- Table structure for table `role`
 --
-
-DROP TABLE IF EXISTS `role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL,
-  `role` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+--DROP TABLE IF EXISTS `role`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `role` (
+--  `role_id` int(11) NOT NULL,
+--  `role` varchar(255) DEFAULT NULL,
+--  PRIMARY KEY (`role_id`)
+--) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `role`
@@ -97,23 +112,23 @@ UNLOCK TABLES;
 --
 -- Table structure for table `sightseeings`
 --
-
-DROP TABLE IF EXISTS `sightseeings`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sightseeings` (
-  `IDSIGHTSEEINGS` int(11) NOT NULL AUTO_INCREMENT,
-  `SIGHTSEEINGSNAME` varchar(255) DEFAULT NULL,
-  `SightSeeingsCityId` int(11) DEFAULT NULL,
-  `sight_seeings_city_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IDSIGHTSEEINGS`),
-  KEY `FK_sightseeings_SightSeeingsCityId` (`SightSeeingsCityId`),
-  KEY `FKepg275n03y57me1wc0i6tmyby` (`sight_seeings_city_id`),
-  CONSTRAINT `FK_sightseeings_SightSeeingsCityId` FOREIGN KEY (`SightSeeingsCityId`) REFERENCES `cities` (`idcities`),
-  CONSTRAINT `FKepg275n03y57me1wc0i6tmyby` FOREIGN KEY (`sight_seeings_city_id`) REFERENCES `cities` (`idcities`),
-  CONSTRAINT `FKmlm48tw8s0bgydnokipgod2pa` FOREIGN KEY (`SightSeeingsCityId`) REFERENCES `cities` (`idcities`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+--DROP TABLE IF EXISTS `sightseeings`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `sightseeings` (
+--  `IDSIGHTSEEINGS` int(11) NOT NULL AUTO_INCREMENT,
+--  `SIGHTSEEINGSNAME` varchar(255) DEFAULT NULL,
+--  `SightSeeingsCityId` int(11) DEFAULT NULL,
+--  `sight_seeings_city_id` int(11) DEFAULT NULL,
+--  PRIMARY KEY (`IDSIGHTSEEINGS`),
+--  KEY `FK_sightseeings_SightSeeingsCityId` (`SightSeeingsCityId`),
+--  KEY `FKepg275n03y57me1wc0i6tmyby` (`sight_seeings_city_id`),
+--  CONSTRAINT `FK_sightseeings_SightSeeingsCityId` FOREIGN KEY (`SightSeeingsCityId`) REFERENCES `cities` (`idcities`),
+--  CONSTRAINT `FKepg275n03y57me1wc0i6tmyby` FOREIGN KEY (`sight_seeings_city_id`) REFERENCES `cities` (`idcities`),
+--  CONSTRAINT `FKmlm48tw8s0bgydnokipgod2pa` FOREIGN KEY (`SightSeeingsCityId`) REFERENCES `cities` (`idcities`)
+--) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+--/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sightseeings`
@@ -125,21 +140,30 @@ INSERT INTO `sightseeings` VALUES (1,'Nature Reserve Entrance',4,NULL),(3,'Old J
 /*!40000 ALTER TABLE `sightseeings` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+
+LOCK TABLES `trip_sightseeing` WRITE;
+/*!40000 ALTER TABLE `trip_sightseeing` DISABLE KEYS */;
+INSERT INTO `trip_sightseeing` VALUES (1,1,7),(3,3,5),(4,4,3),(5,5,4),(6,6,4),(7,7,4),(8,8,16),(9,9,16),(10,10,16),(11,11,2),(12,12,3),(13,13,3),(14,14,3),(15,15,5),(16,16,5),(17,17,5),(18,18,6),(19,19,7),(20,20,7),(21,21,7),(22,22,16),(23,23,16),(24,24,16),(26,26,16),(27,27,16),(28,28,16),(29,29,16),(30,30,16),(31,31,16),(33,33,16),(34,34,16),(35,35,16),(36,36,16),(37,37,16),(38,38,8),(39,39,9),(40,40,9),(42,42,9),(43,43,10),(44,44,10),(45,45,10),(46,46,10),(47,47,10),(48,48,11),(49,49,11),(50,50,11),(51,13,11),(52,51,12),(54,53,12),(55,20,12),(56,52,12),(57,19,12),(59,54,13),(60,55,13),(61,15,13),(62,56,13),(63,57,13),(64,13,14),(65,58,14),(66,50,14),(67,49,14),(68,59,15),(69,60,15),(70,61,15),(71,62,15),(72,63,15),(73,64,15),(74,65,15),(75,66,15),(76,67,15),(77,50,1),(78,4,1),(79,38,6);
+/*!40000 ALTER TABLE `trip_sightseeing` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 --
 -- Table structure for table `storepersis`
 --
-
-DROP TABLE IF EXISTS `storepersis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `storepersis` (
-  `id` int(11) NOT NULL,
-  `catname` varchar(255) DEFAULT NULL,
-  `data1ind` int(11) DEFAULT NULL,
-  `data2ind` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+--DROP TABLE IF EXISTS `storepersis`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `storepersis` (
+--  `id` int(11) NOT NULL,
+--  `catname` varchar(255) DEFAULT NULL,
+--  `data1ind` int(11) DEFAULT NULL,
+--  `data2ind` int(11) DEFAULT NULL,
+--  PRIMARY KEY (`id`)
+--) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `storepersis`
@@ -155,111 +179,99 @@ UNLOCK TABLES;
 -- Table structure for table `traveler`
 --
 
-DROP TABLE IF EXISTS `traveler`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `traveler` (
-  `IDTRAVELER` int(11) NOT NULL AUTO_INCREMENT,
-  `traveler_name` varchar(255) DEFAULT NULL,
-  `TRAVELER_BIRTHDATE` date DEFAULT NULL,
-  PRIMARY KEY (`IDTRAVELER`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--DROP TABLE IF EXISTS `traveler`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `traveler` (
+--  `IDTRAVELER` int(11) NOT NULL AUTO_INCREMENT,
+--  `traveler_name` varchar(255) DEFAULT NULL,
+--  `TRAVELER_BIRTHDATE` date DEFAULT NULL,
+--  PRIMARY KEY (`IDTRAVELER`)
+--) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+--/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `traveler`
 --
 
-LOCK TABLES `traveler` WRITE;
-/*!40000 ALTER TABLE `traveler` DISABLE KEYS */;
-INSERT INTO `traveler` VALUES (2,'Ilia Mahsevitzky','1986-01-08'),(3,'Trav Aller','1983-07-02');
-/*!40000 ALTER TABLE `traveler` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `trip`
 --
-
-DROP TABLE IF EXISTS `trip`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `trip` (
-  `IDTRIP` int(11) NOT NULL AUTO_INCREMENT,
-  `trip_date` date DEFAULT NULL,
-  `trip_hotel` varchar(255) DEFAULT NULL,
-  `trip_moneyspent` int(11) DEFAULT NULL,
-  `trip_numdays` int(11) DEFAULT NULL,
-  `TRIP_NUMMINTRANSIT` int(11) DEFAULT NULL,
-  `trip_city` int(11) DEFAULT NULL,
-  `Trip_id_traveller` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IDTRIP`),
-  KEY `FK_TRIP_Trip_id_traveller` (`Trip_id_traveller`),
-  KEY `FK_TRIP_trip_city` (`trip_city`),
-  CONSTRAINT `FK6waoclk2qtg3j5774nxyxbctw` FOREIGN KEY (`Trip_id_traveller`) REFERENCES `traveler` (`idtraveler`),
-  CONSTRAINT `FK_TRIP_Trip_id_traveller` FOREIGN KEY (`Trip_id_traveller`) REFERENCES `traveler` (`idtraveler`),
-  CONSTRAINT `FK_TRIP_trip_city` FOREIGN KEY (`trip_city`) REFERENCES `cities` (`idcities`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+--DROP TABLE IF EXISTS `trip`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `trip` (
+--  `IDTRIP` int(11) NOT NULL AUTO_INCREMENT,
+--  `trip_date` date DEFAULT NULL,
+--  `trip_hotel` varchar(255) DEFAULT NULL,
+--  `trip_moneyspent` int(11) DEFAULT NULL,
+--  `trip_numdays` int(11) DEFAULT NULL,
+--  `TRIP_NUMMINTRANSIT` int(11) DEFAULT NULL,
+--  `trip_city` int(11) DEFAULT NULL,
+--  `Trip_id_traveller` int(11) DEFAULT NULL,
+--  PRIMARY KEY (`IDTRIP`),
+--  KEY `FK_TRIP_Trip_id_traveller` (`Trip_id_traveller`),
+--  KEY `FK_TRIP_trip_city` (`trip_city`),
+--  CONSTRAINT `FK6waoclk2qtg3j5774nxyxbctw` FOREIGN KEY (`Trip_id_traveller`) REFERENCES `traveler` (`idtraveler`),
+--  CONSTRAINT `FK_TRIP_Trip_id_traveller` FOREIGN KEY (`Trip_id_traveller`) REFERENCES `traveler` (`idtraveler`),
+--  CONSTRAINT `FK_TRIP_trip_city` FOREIGN KEY (`trip_city`) REFERENCES `cities` (`idcities`)
+--) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+--/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `trip`
 --
 
-LOCK TABLES `trip` WRITE;
-/*!40000 ALTER TABLE `trip` DISABLE KEYS */;
-INSERT INTO `trip` VALUES (1,'2014-10-12','none',300,1,180,2,2),(2,'2016-04-04','none',60,1,45,1,2),(3,'2016-04-07','Kook Suite',2000,2,180,2,2),(4,'2015-10-07','none',55,1,33,1,2),(5,'2016-07-29','tlv88',2300,3,120,3,2),(6,'2016-08-08','none',60,1,30,1,2),(7,'2016-08-31','ana inn hostel',1500,2,180,4,2),(8,'2017-03-06','none',75,1,37,1,2),(9,'2017-03-25','ana inn hostel',1900,3,300,5,2),(10,'2017-06-06','loui inn',1600,3,240,6,2),(11,'2017-07-17','Kook Suite',1800,2,180,2,2),(12,'2017-08-31','ana inn hostel',1400,2,180,4,2),(13,'2017-09-11','ana inn hostel',2450,3,120,3,2),(14,'2018-02-11','Agripas Hotel',1950,3,180,2,2),(15,'2018-04-13','Acco Beach',2220,4,300,7,2),(16,'2018-07-17','CitizenM Bankside',15000,8,780,8,2),(17,'2001-01-22','wdwdwd',211,12,123,1,NULL),(18,'2015-01-23','wdwdwd',211,12,1235,3,NULL),(19,'2017-01-31','wdwdwd1',1221,1,21,6,NULL),(20,'2016-01-31','wdwdwd1',21,2,11,1,NULL),(21,'2001-01-22','wdwdwd',1221,2,12,1,NULL),(22,'2001-01-22','wdwdwd',12,2,1,1,NULL),(23,'2016-01-22','wdw2',12,2,22,1,2),(24,'2016-01-22','wdw2',12,2,22,1,2),(25,'2015-03-21','w3dw233',400,1,30,13,2);
-/*!40000 ALTER TABLE `trip` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `trip_sightseeing`
 --
-
-DROP TABLE IF EXISTS `trip_sightseeing`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `trip_sightseeing` (
-  `idtrip_sightseeing` int(11) NOT NULL AUTO_INCREMENT,
-  `trip_sightseeing_nameid` int(11) DEFAULT NULL,
-  `trip_sightseeing_tripid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idtrip_sightseeing`),
-  KEY `FK_trip_sightseeing_trip_sightseeing_nameid` (`trip_sightseeing_nameid`),
-  KEY `FK_trip_sightseeing_trip_sightseeing_tripid` (`trip_sightseeing_tripid`),
-  CONSTRAINT `FK_trip_sightseeing_trip_sightseeing_nameid` FOREIGN KEY (`trip_sightseeing_nameid`) REFERENCES `sightseeings` (`idsightseeings`),
-  CONSTRAINT `FK_trip_sightseeing_trip_sightseeing_tripid` FOREIGN KEY (`trip_sightseeing_tripid`) REFERENCES `trip` (`idtrip`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+--DROP TABLE IF EXISTS `trip_sightseeing`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `trip_sightseeing` (
+--  `idtrip_sightseeing` int(11) NOT NULL AUTO_INCREMENT,
+--  `trip_sightseeing_nameid` int(11) DEFAULT NULL,
+--  `trip_sightseeing_tripid` int(11) DEFAULT NULL,
+--  PRIMARY KEY (`idtrip_sightseeing`),
+--  KEY `FK_trip_sightseeing_trip_sightseeing_nameid` (`trip_sightseeing_nameid`),
+--  KEY `FK_trip_sightseeing_trip_sightseeing_tripid` (`trip_sightseeing_tripid`),
+--  CONSTRAINT `FK_trip_sightseeing_trip_sightseeing_nameid` FOREIGN KEY (`trip_sightseeing_nameid`) REFERENCES `sightseeings` (`idsightseeings`),
+--  CONSTRAINT `FK_trip_sightseeing_trip_sightseeing_tripid` FOREIGN KEY (`trip_sightseeing_tripid`) REFERENCES `trip` (`idtrip`)
+--) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
+--/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `trip_sightseeing`
 --
 
-LOCK TABLES `trip_sightseeing` WRITE;
-/*!40000 ALTER TABLE `trip_sightseeing` DISABLE KEYS */;
-INSERT INTO `trip_sightseeing` VALUES (1,1,7),(3,3,5),(4,4,3),(5,5,4),(6,6,4),(7,7,4),(8,8,16),(9,9,16),(10,10,16),(11,11,2),(12,12,3),(13,13,3),(14,14,3),(15,15,5),(16,16,5),(17,17,5),(18,18,6),(19,19,7),(20,20,7),(21,21,7),(22,22,16),(23,23,16),(24,24,16),(26,26,16),(27,27,16),(28,28,16),(29,29,16),(30,30,16),(31,31,16),(33,33,16),(34,34,16),(35,35,16),(36,36,16),(37,37,16),(38,38,8),(39,39,9),(40,40,9),(42,42,9),(43,43,10),(44,44,10),(45,45,10),(46,46,10),(47,47,10),(48,48,11),(49,49,11),(50,50,11),(51,13,11),(52,51,12),(54,53,12),(55,20,12),(56,52,12),(57,19,12),(59,54,13),(60,55,13),(61,15,13),(62,56,13),(63,57,13),(64,13,14),(65,58,14),(66,50,14),(67,49,14),(68,59,15),(69,60,15),(70,61,15),(71,62,15),(72,63,15),(73,64,15),(74,65,15),(75,66,15),(76,67,15),(77,50,1),(78,4,1),(79,38,6);
-/*!40000 ALTER TABLE `trip_sightseeing` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `user`
 --
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `active` int(11) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_sb8bbouer5wak8vyiiy4pf2bx` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+--DROP TABLE IF EXISTS `user`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `user` (
+--  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+--  `password` varchar(255) NOT NULL,
+--  `role` varchar(255) NOT NULL,
+--  `username` varchar(255) NOT NULL,
+--  `active` int(11) DEFAULT NULL,
+--  `email` varchar(255) DEFAULT NULL,
+--  `last_name` varchar(255) DEFAULT NULL,
+--  `name` varchar(255) DEFAULT NULL,
+--  PRIMARY KEY (`id`),
+--  UNIQUE KEY `UK_sb8bbouer5wak8vyiiy4pf2bx` (`username`)
+--) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+--/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
@@ -274,20 +286,20 @@ UNLOCK TABLES;
 --
 -- Table structure for table `user1`
 --
-
-DROP TABLE IF EXISTS `user1`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user1` (
-  `user_id` int(11) NOT NULL,
-  `active` int(11) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+--DROP TABLE IF EXISTS `user1`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `user1` (
+--  `user_id` int(11) NOT NULL,
+--  `active` int(11) DEFAULT NULL,
+--  `email` varchar(255) DEFAULT NULL,
+--  `last_name` varchar(255) DEFAULT NULL,
+--  `name` varchar(255) DEFAULT NULL,
+--  `password` varchar(255) DEFAULT NULL,
+--  PRIMARY KEY (`user_id`)
+--) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user1`
@@ -302,17 +314,17 @@ UNLOCK TABLES;
 --
 -- Table structure for table `user_role`
 --
-
-DROP TABLE IF EXISTS `user_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_role` (
-  `user_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`,`role_id`),
-  KEY `FKa68196081fvovjhkek5m97n3y` (`role_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+--DROP TABLE IF EXISTS `user_role`;
+--/*!40101 SET @saved_cs_client     = @@character_set_client */;
+--/*!40101 SET character_set_client = utf8 */;
+--CREATE TABLE `user_role` (
+--  `user_id` int(11) NOT NULL,
+--  `role_id` int(11) NOT NULL,
+--  PRIMARY KEY (`user_id`,`role_id`),
+--  KEY `FKa68196081fvovjhkek5m97n3y` (`role_id`)
+--) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user_role`

@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "role")
+//@IdClass(ComposedKey.class)
 public class Role1 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,3 +19,11 @@ public class Role1 {
 //		// TODO Auto-generated constructor stub
 //	}
 }
+
+//public class ComposedKey implements Serializable {
+//    private long id;
+//    private String identity;
+//
+//    //Getter / Setter
+//
+//}

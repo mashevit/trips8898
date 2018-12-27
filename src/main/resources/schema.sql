@@ -168,7 +168,7 @@ CREATE TABLE `trip` (
   PRIMARY KEY (`IDTRIP`),
   KEY `FK_TRIP_Trip_id_traveller` (`Trip_id_traveller`),
   KEY `FK_TRIP_trip_city` (`trip_city`),
-  CONSTRAINT `FK6waoclk2qtg3j5774nxyxbctw` FOREIGN KEY (`Trip_id_traveller`) REFERENCES `traveler` (`idtraveler`),
+
   CONSTRAINT `FK_TRIP_Trip_id_traveller` FOREIGN KEY (`Trip_id_traveller`) REFERENCES `traveler` (`idtraveler`),
   CONSTRAINT `FK_TRIP_trip_city` FOREIGN KEY (`trip_city`) REFERENCES `cities` (`idcities`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;

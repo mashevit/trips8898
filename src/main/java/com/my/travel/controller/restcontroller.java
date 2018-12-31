@@ -127,6 +127,7 @@ public class restcontroller {
 		System.out.println("  trippic 	");
 		List<TripSightseeing> tripSightseeings = tripSightseeingRepository.findAllByTripIdtrip(id);
 		String globalc = cityRepository.findById(id).get().getCityName();
+		String globalc1=tripRepository.findById(id).get().nameCompat();
 		List<ToAndApp> tmp = new ArrayList<ToAndApp>();
 		tripSightseeings.forEach(a -> {
 			List<Pic> pictmp = picRepository.findAllBytripSightseeingIdtripSightseeing(a.getIdtripSightseeing());
@@ -136,7 +137,7 @@ public class restcontroller {
 			// pictmp.stream().forEach(ab->{andApp.setImgaddr(ab.getPicsAddr());});
 
 			andApp.setImgaddr("www://");
-			andApp.setTrip(globalc);
+			andApp.setTrip(globalc1);//todo: set trip name
 			andApp.setSight(a.getSightseeing().getSightseeingsname());
 			tmp.add(andApp);
 

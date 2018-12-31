@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -53,6 +55,7 @@ public class Trip implements Serializable {
 	//bi-directional many-to-one association to Traveler
 	@ManyToOne
 	@JoinColumn(name="Trip_id_traveller")
+    @OnDelete(action = OnDeleteAction.CASCADE)
 	private Traveler traveler;
 
 	//bi-directional many-to-one association to TripSightseeing
@@ -154,7 +157,7 @@ public class Trip implements Serializable {
 	public String nameCompat() {
 	     //SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	       // Date date = dt.parse(date_s);
-
+if(getIdtrip()==-1) return "null TRIP";
 	        // *** same for the format String below
 	        SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
 	        System.out.println();

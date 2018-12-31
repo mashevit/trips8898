@@ -12,4 +12,6 @@ public interface StorePersisRepository extends JpaRepository<StorePersis, Intege
 
 	
 	List<StorePersis> findBycatname(String cat);
+	
+	StorePersis findByCatnameAndData1ind(String cat, int dat);
 }

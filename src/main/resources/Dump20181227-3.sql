@@ -1,5 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `travel1` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `travel1`;
+CREATE DATABASE  IF NOT EXISTS `testschema` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `testschema`;
+
+--`travel1` /*!40100 DEFAULT CHARACTER SET utf8 */;
+--USE `travel1`;
 -- MySQL dump 10.13  Distrib 5.5.60, for Win64 (AMD64)
 --
 -- Host: localhost    Database: travel1

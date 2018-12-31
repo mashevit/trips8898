@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.my.travel.components.Stateful;
 import com.my.travel.components.Stateful2;
+import com.my.travel.components.ToAndApp;
 import com.my.travel.components.Tosave;
 import com.my.travel.dao.CityRepository;
 import com.my.travel.dao.PicRepository;
@@ -74,7 +76,10 @@ public class tripeditorcontroller {
 	@RequestMapping(value = "/edittrip")
 	public String notesList(Model model) {
 		if (!model.containsAttribute("requestedTrip")||!model.containsAttribute("requestedSight")) {
-			Trip tr = getusers().get(0);
+			Trip tr;
+			if(getusers().size()==0) {tr= new Trip(); tr.setIdtrip(-1);tr.setCity(nullcity());}
+			else {
+			/*Trip*/ tr = getusers().get(0);}
 			model.addAttribute("requestedTrip", tr);
 			sightlistinit(model, tr);
 
@@ -87,17 +92,76 @@ public class tripeditorcontroller {
 			model.addAttribute("selectedTrOption", new Trip());
 			model.addAttribute("fooOption", new Sightseeing());
 		}
-		return "tripeditor";
+		return "redirect:/web/init-sights";
 	}
 
+		public City nullcity() {
+			
+			City c=new City(); c.setCityName("null city");c.setIdcities(-1);
+			return c;
+		}
 	private void sightlistinit(Model model, Trip tr) {
+		if(tr.getIdtrip()==-1) {
+
+			initnullsight(model); return;
+		}else {
 		List<Sightseeing> l1 = getsights(tr.getIdtrip());
+		if(l1.size()==0) 	{initnullsight(model); return;}
 		model.addAttribute("sights", l1);
 		List<Sightseeing> l2 = getsights2(tr);
 		model.addAttribute("sights2", getsightsdiff(getsights2(tr), l1));
+		if(l2.size()==0) {			Sightseeing s=new Sightseeing();	s.setCity(nullcity());s.setIdsightseeings(-1);s.setSightseeingsname("null sight");
+		model.addAttribute("requestedSight", s);}else
+		model.addAttribute("requestedSight", l2.get(0));
+	}}
+	
+	@RequestMapping("/init-sights")
+	private String sightlistinit2(Model model, @ModelAttribute("requestedTrip") Trip tr) {
+		if(tr.getIdtrip()==-1) {
+
+			initnullsight(model);return "tripeditor";
+		}else {
+		List<Sightseeing> l1 = getsights(tr.getIdtrip());
+		if(l1.size()==0) 	{initnullsight(model); return "tripeditor";}
+		model.addAttribute("sights", l1);
+		List<Sightseeing> l2 = getsights2(tr);
+		model.addAttribute("sights2", getsightsdiff(getsights2(tr), l1));
+		if(l2.size()==0) {			Sightseeing s=new Sightseeing();	s.setCity(nullcity());s.setIdsightseeings(-1);s.setSightseeingsname("null sight");
+		model.addAttribute("requestedSight", s);}else
 		model.addAttribute("requestedSight", l2.get(0));
 	}
+		return "tripeditor";
+	}
+//	
+//	@ModelAttribute("requestedTrip") Trip requestedTrip
 
+	private void initnullsight(Model model) {
+		
+		model.addAttribute("sights", nulllistsights());
+		
+		model.addAttribute("sights2", nulllistsights());
+
+		model.addAttribute("requestedSight",nullSightseeing());
+		
+		
+	}	
+	
+	
+	private Sightseeing nullSightseeing() {
+		Sightseeing s=new Sightseeing();	s.setCity(nullcity());
+		s.setIdsightseeings(-1);s.setSightseeingsname("null sight");
+		return s;
+		
+		
+	}
+	
+	private List<Sightseeing> nulllistsights(){
+		List<Sightseeing> aa=new ArrayList<Sightseeing>();
+		aa.add(nullSightseeing());
+		return aa;
+		
+	}
+	
 /*	@RequestMapping(value = "/addcityto")
 	public String notesList1() {
 		City a = new City();
@@ -199,8 +263,10 @@ public class tripeditorcontroller {
 
 		// model.addAttribute("requestedSight", nameofsight);
 	   //	int ind = nameofsight.getIdsightseeings();
-		boolean ans = sightslist1.stream().filter(o -> o.getSightseeingsname() == nameofsight).findFirst().isPresent();
-		boolean ans2 = sightslist2.stream().filter(o -> o.getSightseeingsname() == nameofsight).findFirst().isPresent();
+		boolean ans=false;
+		if(sightslist1==null) ans=false; else  ans = sightslist1.stream().filter(o -> o.getSightseeingsname() == nameofsight).findFirst().isPresent();
+		boolean ans2=false;
+		if(sightslist2==null) ans=false; else ans2 = sightslist2.stream().filter(o -> o.getSightseeingsname() == nameofsight).findFirst().isPresent();
 		TripSightseeing tripSightseeing=new TripSightseeing();
 		Sightseeing newSightsee=null;
 		if (ans2&&!ans) {
@@ -242,8 +308,6 @@ public class tripeditorcontroller {
 		model.addAttribute("requestedtrSight", tripSightseeing.getIdtripSightseeing());
 		return "tripeditor";
 	}
-	
-	
 	
 
 	@ModelAttribute("trips")
@@ -398,5 +462,13 @@ public class tripeditorcontroller {
 		return "tripeditor";
 	}
 	
+	
+	@PostMapping("/deltrip")
+	public String deltrip(@ModelAttribute("requestedTrip") Trip requestedTrip, Model model) {
+
+		tripRepository.delete(requestedTrip);
+
+		return "tripeditor";
+	}
 	
 }

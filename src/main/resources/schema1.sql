@@ -1,5 +1,7 @@
-CREATE DATABASE  IF NOT EXISTS `travel1` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `travel1`;
+CREATE DATABASE  IF NOT EXISTS `testschema` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `testschema`;
+--`travel1` /*!40100 DEFAULT CHARACTER SET utf8 */;
+--USE `travel1`;
 -- MySQL dump 10.13  Distrib 5.5.60, for Win64 (AMD64)
 --
 -- Host: localhost    Database: travel1
@@ -21,6 +23,19 @@ USE `travel1`;
 -- Table structure for table `car`
 --
 SET FOREIGN_KEY_CHECKS=0;
+
+--
+--???????
+--USE `testschema`;
+--create table hibernate_sequences(
+--    sequence_name VARCHAR(70) NOT NULL,
+--    next_val INTEGER NOT NULL
+--)
+
+
+
+
+
 DROP TABLE IF EXISTS `car`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

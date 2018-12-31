@@ -15,8 +15,8 @@
 
 <link href="../static/css/FileOne.css" th:href="@{/css/FileOne.css}"
 	rel="stylesheet" />
-	
-		<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
+
+<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
 </head>
 
 
@@ -72,8 +72,8 @@
 				<h2>About This Site</h2>
 				<h4>Here are my Travels</h4>
 				<p>And More Should Come</p>
-				<a th:href="@{'/web/edittrip'}"><button class="btn btn-default btn-lg">Edit a Trip</button>
-				</a>
+				<a th:href="@{'/web/edittrip'}"><button
+						class="btn btn-default btn-lg">Edit a Trip</button> </a>
 			</div>
 			<div class="col-sm-4">
 
@@ -113,8 +113,9 @@
 			<form th:action="@{/web/addcity}" method="post"
 				enctype="multipart/form-data">
 				<div class="col-sm-4">
-					<label for="newcity">new city</label> <input type="text" class="form-control" id="newcity"
-					 name="newcity" placeholder="add new city" />
+					<label for="newcity">new city</label> <input type="text"
+						class="form-control" id="newcity" name="newcity"
+						placeholder="add new city" />
 					<button class="btn btn-default btn-lg">Add a City</button>
 				</div>
 			</form>
@@ -147,7 +148,8 @@
 					<label for="Inputselect">city</label>
 					<div class="input-group">
 						<div class="form-group blu-margin">
-							<select class="form-control" th:name="nameofcity" th:field="*{City}">
+							<select class="form-control" th:name="nameofcity"
+								th:field="*{City}">
 								<option th:each="user : ${cities}" th:value="${user.idcities}"
 									th:text="${user.cityName}"></option>
 							</select>
@@ -160,14 +162,16 @@
 					<span class="glyphicon glyphicon-glass logo-small"></span>
 					<h4>hotel</h4>
 					<label for="Name2">hotel</label> <input type="text"
-						class="form-control" id="hotel" placeholder="hotel name" th:field="*{tripHotel}"/>
+						class="form-control" id="hotel" placeholder="hotel name"
+						th:field="*{tripHotel}" />
 
 				</div>
 				<div class="col-sm-4">
 					<span class="glyphicon glyphicon-euro logo-small"></span>
 					<h4>budget</h4>
 					<label for="Name2">budget</label> <input type="text"
-						class="form-control" id="budget" placeholder="enter money spent" th:field="*{tripMoneyspent}"/>
+						class="form-control" id="budget" placeholder="enter money spent"
+						th:field="*{tripMoneyspent}" />
 
 				</div>
 			</div>
@@ -176,22 +180,25 @@
 				<div class="col-sm-4">
 					<span class="glyphicon glyphicon-time logo-small"></span>
 					<h4>date</h4>
-					<label for="Name2">date</label> <input type="date"   
-						class="form-control" id="date" th:placeholder="yyyy-mm-dd" th:field="*{{tripDate}}"/>
+					<label for="Name2">date</label> <input type="date"
+						class="form-control" id="date" th:placeholder="yyyy-mm-dd"
+						th:field="*{{tripDate}}" />
 
 				</div>
 				<div class="col-sm-4">
 					<span class="glyphicon glyphicon-calendar logo-small"></span>
 					<h4>duration</h4>
 					<label for="Name2">number of days</label> <input type="text"
-						class="form-control" id="duration" placeholder="number of days" th:field="*{tripNumdays}"/>
+						class="form-control" id="duration" placeholder="number of days"
+						th:field="*{tripNumdays}" />
 
 				</div>
 				<div class="col-sm-4">
 					<span class="glyphicon glyphicon-road logo-small"></span>
 					<h4>transit time</h4>
 					<label for="Name2">transit time</label> <input type="text"
-						class="form-control" id="transit" placeholder="enter transit time" th:field="*{tripNummintransit}"/>
+						class="form-control" id="transit" placeholder="enter transit time"
+						th:field="*{tripNummintransit}" />
 				</div>
 
 			</div>
@@ -203,7 +210,7 @@
 		</div>
 	</form>
 
-<!-- <div th:if="${not #lists.isEmpty(frontp) and not #lists.isEmpty(frtr) and not #lists.isEmpty(utrips)}"> -->
+	<!-- <div th:if="${not #lists.isEmpty(frontp) and not #lists.isEmpty(frtr) and not #lists.isEmpty(utrips)}"> -->
 	<div id="portfolio" class="container-fluid text-center bg-grey"
 		th:if="${#lists.size(frontp)>=3}">
 		<h2>Portfolio</h2>
@@ -211,50 +218,118 @@
 		<div class="row text-center slideanim ">
 			<div class="col-sm-4 ">
 				<div class="thumbnail" id="columnOne">
-					<div>
-						<img th:src="${frontp[0][0].picsAddr}" alt="Paris" width="400"
-							height="300">
-					</div>
-					<p>
-						<a th:href="@{'/web/tripcity/' + ${frontp[0][1].idcities}}"><strong th:text="${frontp[0][1].cityName}"></strong>
-					</a>
-					</p>
-					<p>
-						Yes, we built <span th:text="${frontp[0][1].cityName}"></span>
-					</p>
-				</div>
+					<div th:switch="${frontp[0][1].idcities!=-1}">
 
-			</div>
-			<div class="col-sm-4 ">
-				<div class="thumbnail" id="columnTwo">
-					<div>
-						<img th:src="${frontp[1][0].picsAddr}" alt="New York" width="400"
-							height="300">
-						<div>
-							<p>
-								<a th:href="@{'/web/tripcity/' + ${frontp[1][1].idcities}}"><strong th:text="${frontp[1][1].cityName}">New York</strong></a>
-							</p>
-							<p>
-								We built <span th:text="${frontp[1][1].cityName}"></span>
-							</p>
+						<div th:case="true">
+							<img th:src="${frontp[0][0].picsAddr}" alt="Paris" width="400"
+								height="300">
+							<div>
+
+								<p>
+									<a th:href="@{'/web/tripcity/' + ${frontp[0][1].idcities}}"><strong
+										th:text="${frontp[0][1].cityName}"></strong> </a>
+								</p>
+								<p>
+									Yes, we built <span th:text="${frontp[0][1].cityName}"></span>
+								</p>
+
+							</div>
+						</div>
+
+						<div th:case="false">
+							<img th:src="@{/img/7.png}" alt="Paris" width="400" height="300">
+							<div>
+
+								<p>
+									Please add <strong>ANOTHER</strong>
+								</p>
+								<p>
+									CITY <span>DATA</span>
+								</p>
+
+							</div>
 						</div>
 					</div>
 
 				</div>
 			</div>
 			<div class="col-sm-4 ">
+				<div class="thumbnail" id="columnTwo">
+					<div th:switch="${frontp[1][1].idcities!=-1}">
+
+						<div th:case="true">
+							<img th:src="${frontp[1][0].picsAddr}" alt="Paris" width="400"
+								height="300">
+							<div>
+
+								<p>
+									<a th:href="@{'/web/tripcity/' + ${frontp[1][1].idcities}}"><strong
+										th:text="${frontp[1][1].cityName}"></strong> </a>
+								</p>
+								<p>
+									We built <span th:text="${frontp[1][1].cityName}"></span>
+								</p>
+
+							</div>
+						</div>
+
+						<div th:case="false">
+							<img th:src="@{/img/7.png}" alt="Paris" width="400" height="300">
+							<div>
+
+								<p>
+									Please add <strong>ANOTHER</strong>
+								</p>
+								<p>
+									CITY <span>DATA</span>
+								</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4 ">
 				<div class="thumbnail" id="columnthree">
-					<img th:src="${frontp[2][0].picsAddr}" alt="San Francisco"
-						width="400" height="300">
-					<p>
-						<a th:href="@{'/web/tripcity/' + ${frontp[2][1].idcities}}"><strong th:text="${frontp[2][1].cityName}">San Francisco</strong></a>
-					</p>
-					<p>
-						Yes, <span th:text="${frontp[2][1].cityName}"></span> is ours
-					</p>
+					<div th:switch="${frontp[2][1].idcities!=-1}">
+
+						<div th:case="true">
+							<img th:src="${frontp[2][0].picsAddr}" alt="Paris" width="400"
+								height="300">
+							<div>
+
+								<p>
+									<a th:href="@{'/web/tripcity/' + ${frontp[2][1].idcities}}"><strong
+										th:text="${frontp[2][1].cityName}"></strong> </a>
+								</p>
+								<p>
+									Yes, <span th:text="${frontp[2][1].cityName}"></span> is ours
+								</p>
+
+							</div>
+						</div>
+
+						<div th:case="false">
+							<img th:src="@{/img/7.png}" alt="Paris" width="400" height="300">
+							<div>
+
+								<p>
+									Please add <strong>ANOTHER</strong>
+								</p>
+								<p>
+									CITY <span>DATA</span>
+								</p>
+
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+
+
+
+		<!-- 	<div th:if="${not #lists.isEmpty(utrips)}"> -->
 		<h2>Selected Trips</h2>
 		<div id="myCarousel" class="carousel slide text-center"
 			data-ride="carousel">
@@ -267,68 +342,91 @@
 
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">
-				<div class="item active">
-					<h4>
-						<span th:text="${utrips[0]}"></span><br>to <a th:href="@{'/web/tripcity/' + ${utrips[0].city.idcities}}"><span
+				<div class="item active" th:switch="${#lists.isEmpty(utrips)}">
+					<h4 th:case="false">
+						<span th:text="${utrips[0]}"></span><br>to <a
+							th:href="@{'/web/tripcity/' + ${utrips[0].city.idcities}}"><span
 							style="font-style: normal;" th:text="${utrips[0].city}"></span></a>
 					</h4>
+					<h4 th:case="true">
+						add another trip<br>to some <span style="font-style: normal;">city
+						</span>
+					</h4>
 				</div>
-				<div class="item">
-					<h4>
-						<span th:text="${utrips[1]}"></span><br>to <a th:href="@{'/web/tripcity/' + ${utrips[1].city.idcities}}"><span
+				<div class="item" th:switch="${#lists.isEmpty(utrips)}">
+					<h4 th:case="false">
+						<span th:text="${utrips[1]}"></span><br>to <a
+							th:href="@{'/web/tripcity/' + ${utrips[1].city.idcities}}"><span
 							style="font-style: normal;" th:text="${utrips[1].city}"></span></a>
 					</h4>
-				</div>
-				<div class="item">
-					<h4>
-						<span th:text="${utrips[2]}"></span> <br>to <a th:href="@{'/web/tripcity/' + ${utrips[2].city.idcities}}"><span
-							style="font-style: normal;" th:text="${utrips[2].city}"></span></a>
+					<h4 th:case="true">
+						add another trip<br>to some <span style="font-style: normal;">city
+						</span>
 					</h4>
 				</div>
-			</div>
-
-			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#myCarousel" role="button"
-				data-slide="prev"> <span
-				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a> <a class="right carousel-control" href="#myCarousel" role="button"
-				data-slide="next"> <span
-				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-		</div>
-	</div>
-
-	<div id="pricing" class="container-fluid">
-		<div class="text-center">
-			<h2>3 Chosen Cities</h2>
-			<h4>Trips From 3 Chosen Cities</h4>
-		</div>
-		<div class="row slideanim">
-			<div class="col-sm-4">
-				<div class="panel panel-default text-center">
-					<div class="panel-heading">
-						<h1>
-							City <span th:text="${frontcities[0]}"></span>
-						</h1>
-					</div>
-					<div class="panel-body">
-						<script>var coun=0;</script>
-						<th:block th:each="content : ${frtr[0]}">
-							<p>
-								<strong th:text="${#dates.format(content.tripDate, 'dd-MMM-yyyy')}">date</strong> for <span
-									th:text="${content.tripNumdays}"></span> days
-							</p>
-						</th:block>
-					</div>
-					<div class="panel-footer">
-						<h3 id="cou0">num</h3>
-						<h4>days total</h4>
-					<a th:href="@{'/web/tripcity/' + ${frontcities[0].idcities}}">	<button class="btn btn-lg">explore</button></a>
-					</div>
+				<div class="item" th:switch="${#lists.isEmpty(utrips)}">
+					<h4 th:case="false">
+						<span th:text="${utrips[2]}"></span> <br>to <a
+							th:href="@{'/web/tripcity/' + ${utrips[2].city.idcities}}"><span
+							style="font-style: normal;" th:text="${utrips[2].city}"></span></a>
+					</h4>
+					<h4 th:case="true">
+						add another trip<br>to some <span style="font-style: normal;">city
+						</span>
+					</h4>
 				</div>
-							<script type="text/javascript" th:inline="javascript">
+
+
+				<!-- Left and right controls -->
+				<a class="left carousel-control" href="#myCarousel" role="button"
+					data-slide="prev"> <span
+					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a> <a class="right carousel-control" href="#myCarousel" role="button"
+					data-slide="next"> <span
+					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+
+
+	</div>
+<!-- 	<div
+		th:if="${not #lists.isEmpty(frontcities) and not #lists.isEmpty(frtr)}"> -->
+		<div id="pricing" class="container-fluid"
+			th:switch="${#lists.isEmpty(frontcities)}">
+			<div class="text-center">
+				<h2>3 Chosen Cities</h2>
+				<h4>Trips From 3 Chosen Cities</h4>
+			</div>
+			<div class="row slideanim" th:case="${false}">
+				<div class="col-sm-4">
+					<div class="panel panel-default text-center">
+						<div class="panel-heading">
+							<h1>
+								City <span th:text="${frontcities[0]}"></span>
+							</h1>
+						</div>
+						<div class="panel-body">
+							<script>var coun=0;</script>
+							<th:block th:each="content : ${frtr[0]}">
+								<p>
+									<strong
+										th:text="${#dates.format(content.tripDate, 'dd-MMM-yyyy')}">date</strong>
+									for <span th:text="${content.tripNumdays}"></span> days
+								</p>
+							</th:block>
+						</div>
+						<div class="panel-footer">
+							<h3 id="cou0">num</h3>
+							<h4>days total</h4>
+							<a th:href="@{'/web/tripcity/' + ${frontcities[0].idcities}}">
+								<button class="btn btn-lg">explore</button>
+							</a>
+						</div>
+					</div>
+					<script type="text/javascript" th:inline="javascript">
 										var items = 0;
 									
 									/*[# th:each="n : ${frtr[0]}"]*/
@@ -337,35 +435,37 @@
 									/*[/]*/
 								document.getElementById("cou0").innerHTML = items;
 				</script>
-				
-			</div>
-			<div class="col-sm-4">
-				<div class="panel panel-default text-center">
-					<div class="panel-heading">
-						<h1>
-							City <span th:text="${frontcities[1]}"></span>
-						</h1>
-					</div>
-					<div class="panel-body">
-						<th:block th:each="content : ${frtr[1]}">
-							<p>
-								<strong th:text="${#dates.format(content.tripDate, 'dd-MMM-yyyy')}">date</strong> for <span
-									th:text="${content.tripNumdays}"></span> days
 
-							</p>
-
-						</th:block>
-
-
-					</div>
-					<div class="panel-footer">
-						<h3 id="cou1">num</h3>
-						<h4>days total</h4>
-						<a th:href="@{'/web/tripcity/' + ${frontcities[1].idcities}}"><button class="btn btn-lg">explore</button></a>
-					</div>
 				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-default text-center">
+						<div class="panel-heading">
+							<h1>
+								City <span th:text="${frontcities[1]}"></span>
+							</h1>
+						</div>
+						<div class="panel-body">
+							<th:block th:each="content : ${frtr[1]}">
+								<p>
+									<strong
+										th:text="${#dates.format(content.tripDate, 'dd-MMM-yyyy')}">date</strong>
+									for <span th:text="${content.tripNumdays}"></span> days
 
-				<script type="text/javascript" th:inline="javascript">
+								</p>
+
+							</th:block>
+
+
+						</div>
+						<div class="panel-footer">
+							<h3 id="cou1">num</h3>
+							<h4>days total</h4>
+							<a th:href="@{'/web/tripcity/' + ${frontcities[1].idcities}}"><button
+									class="btn btn-lg">explore</button></a>
+						</div>
+					</div>
+
+					<script type="text/javascript" th:inline="javascript">
 										var items = 0;
 									
 									/*[# th:each="n : ${frtr[1]}"]*/
@@ -377,30 +477,32 @@
 
 
 
-			</div>
-			<div class="col-sm-4">
-				<div class="panel panel-default text-center">
-					<div class="panel-heading">
-						<h1>
-							City <span th:text="${frontcities[2]}"></span>
-						</h1>
-					</div>
-					<div class="panel-body">
-						<th:block th:each="content : ${frtr[2]}">
-							<p>
-								<strong th:text="${#dates.format(content.tripDate, 'dd-MMM-yyyy')}">date</strong> for <span
-									th:text="${content.tripNumdays}"></span> days
-							</p>
-						</th:block>
-					</div>
-					<div class="panel-footer">
-						<h3 id="cou2">num</h3>
-						<h4>days total</h4>
-						<a th:href="@{'/web/tripcity/' + ${frontcities[2].idcities}}"><button class="btn btn-lg">explore</button></a>
-					</div>
 				</div>
-				
-							<script type="text/javascript" th:inline="javascript">
+				<div class="col-sm-4">
+					<div class="panel panel-default text-center">
+						<div class="panel-heading">
+							<h1>
+								City <span th:text="${frontcities[2]}"></span>
+							</h1>
+						</div>
+						<div class="panel-body">
+							<th:block th:each="content : ${frtr[2]}">
+								<p>
+									<strong
+										th:text="${#dates.format(content.tripDate, 'dd-MMM-yyyy')}">date</strong>
+									for <span th:text="${content.tripNumdays}"></span> days
+								</p>
+							</th:block>
+						</div>
+						<div class="panel-footer">
+							<h3 id="cou2">num</h3>
+							<h4>days total</h4>
+							<a th:href="@{'/web/tripcity/' + ${frontcities[2].idcities}}"><button
+									class="btn btn-lg">explore</button></a>
+						</div>
+					</div>
+
+					<script type="text/javascript" th:inline="javascript">
 										var items = 0;
 									
 									/*[# th:each="n : ${frtr[2]}"]*/
@@ -409,14 +511,86 @@
 									/*[/]*/
 								document.getElementById("cou2").innerHTML = items;
 				</script>
-				
+
+				</div>
 			</div>
+
+
+
+			<div class="row slideanim"  th:case="${true}">
+				<div class="col-sm-4">
+					<div class="panel panel-default text-center">
+						<div class="panel-heading">
+							<h1>Please</h1>
+						</div>
+						<div class="panel-body">
+							<p>
+								<strong>Add</strong> ANOTHER
+							</p>
+							<p>
+								<strong>city</strong> DATA
+							</p>
+
+						</div>
+						<div class="panel-footer">
+							<h3>TO</h3>
+							<h4>DB, in order to</h4>
+							<button class="btn btn-lg">explore</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-default text-center">
+						<div class="panel-heading">
+							<h1>Please</h1>
+						</div>
+						<div class="panel-body">
+							<p>
+								<strong>Add</strong> ANOTHER
+							</p>
+							<p>
+								<strong>city</strong> DATA
+							</p>
+
+						</div>
+						<div class="panel-footer">
+							<h3>TO</h3>
+							<h4>DB, in order to</h4>
+							<button class="btn btn-lg">explore</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-default text-center">
+						<div class="panel-heading">
+							<h1>Please</h1>
+						</div>
+						<div class="panel-body">
+							<p>
+								<strong>Add</strong> ANOTHER
+							</p>
+							<p>
+								<strong>city</strong> DATA
+							</p>
+
+						</div>
+						<div class="panel-footer">
+							<h3>TO</h3>
+							<h4>DB, in order to</h4>
+							<button class="btn btn-lg">explore</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
 		</div>
-	</div>
-	
-	
-	
-<!-- 	</div> -->
+
+
+<!-- 	</div>
+ -->
 	<div id="contact" class="container-fluid bg-grey">
 		<h2 class="text-center">CONTACT</h2>
 		<div class="row slideanim">

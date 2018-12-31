@@ -589,8 +589,14 @@
 		</div>
 	</form>
 
+	<form th:action="@{'/web/deltrip'}" th:object="${requestedTrip}"
+		class="form-inline" method="Post">
 
-
+		<div class="container-fluid text-center">
+			<button type="submit" class="btn btn-lg btn-danger">DELETE
+				TRIP</button>
+		</div>
+	</form>
 
 
 

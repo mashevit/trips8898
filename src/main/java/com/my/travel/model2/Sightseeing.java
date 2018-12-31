@@ -15,6 +15,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,6 +43,7 @@ public class Sightseeing implements Serializable {
 	//bi-directional many-to-one association to City
 	@ManyToOne
 	@JoinColumn(columnDefinition="integer", name="sightseeingscityid", nullable=false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
 	private City city;
 

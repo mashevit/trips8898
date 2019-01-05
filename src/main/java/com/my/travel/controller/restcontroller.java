@@ -126,7 +126,7 @@ public class restcontroller {
 
 		System.out.println("  trippic 	");
 		List<TripSightseeing> tripSightseeings = tripSightseeingRepository.findAllByTripIdtrip(id);
-		String globalc = cityRepository.findById(id).get().getCityName();
+	//	String globalc = cityRepository.findById(id).get().getCityName();
 		String globalc1=tripRepository.findById(id).get().nameCompat();
 		List<ToAndApp> tmp = new ArrayList<ToAndApp>();
 		tripSightseeings.forEach(a -> {

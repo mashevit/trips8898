@@ -3,7 +3,7 @@
 
 <head>
 <!-- Theme Made By www.w3schools.com - No Copyright -->
-<title>Bootstrap Theme Company Page</title>
+<title>Trip Editor Page</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
@@ -205,7 +205,9 @@
 					<button class="btn btn-default btn-link" id="list">ListItems</button>
 					<button class="btn btn-default btn-link" id="clear">ClearList</button>
 					<button class="btn btn-default btn-link" id="forsitelist">listpicsforsite</button>
-
+					<button class="btn btn-default btn-link" id="listdata">ispresent</button>
+					<button class="btn btn-default btn-link" style="color: #f4511e !important;" id="tokenize">tokenize(;)</button>
+					<button class="btn btn-default btn-link" style="color: #f4511e !important;" id="clrtable">clrtable</button>
 
 				</h4>
 			</div>
@@ -313,16 +315,58 @@
 
 							});
 			
-			
-			
-			
-			
-			
-			
-
-
 			/*]]>*/
 		</script>
+
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			var trsiid  = [[${session.requestedtrSight}]];
+			+]*/
+
+			$("#listdata")
+					.click(
+							function() {
+
+								$
+										.ajax({
+											type : "GET",
+											url : "/web/ispresent",
+											data : {
+												"id" : trsiid
+											},
+											success : function(data) {
+												var a = "<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>";
+
+												for (var i = 0; i < data.length; i++) {
+													var tds = '<tr><td>'
+															+ (i + 1)
+															+ '.</td><td> '
+															+ data[i].trs
+															+ "</td><td> "
+															+ data[i].addr
+															+ '</td><td><button class="btn btn-default btn-link" name="b" id="listdel" data-other-attr='
+															+ i
+															+ ' >remove</button></td></tr>';
+
+													a += tds
+												}
+												a += "</table>";
+												$('#tbl').html(a);
+
+											}
+										});
+
+							});
+			
+			
+			/*]]>*/
+		</script>
+
+
 
 		<script th:inline="javascript">
 			/*<![CDATA[*/
@@ -347,6 +391,25 @@
 					dataType : 'json'
 				});
 			});
+			
+			
+			
+			
+			$("#tokenize").click(function() {
+
+				$.ajax({
+					url : '/web/addpictok',
+					type : 'POST',
+					contentType : 'application/json',
+					data : JSON.stringify({
+						addr : $("#sightpic").val(),
+						trs : user
+					}),
+					dataType : 'json'
+				});
+			});
+			
+			
 			
 			
 			
@@ -391,6 +454,10 @@
 				});
 			});
 			
+			$("#clrtable").click(function() {
+				var a="<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>";
+				$('#tbl').html(a);
+			});
 			
 			$("#sbmttodb").click(function() {
 

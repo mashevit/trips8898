@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 
-	<groupId>com.creditone</groupId>
-	<artifactId>creditone</artifactId>
+	<groupId>com.my.travel</groupId>
+	<artifactId>travels</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>creditone</name>
-	<description>Demo project for Spring Boot</description>
+	<name>mytrips</name>
+	<description>Trips of Ilia WebApp</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

@@ -17,8 +17,8 @@ import com.my.travel.model2.User;
 */
 @SpringBootApplication
 public class Application {
-	@Autowired 
-	private UserRepository urepository;
+//	@Autowired 
+//	private UserRepository urepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

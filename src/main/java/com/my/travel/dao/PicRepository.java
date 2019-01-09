@@ -2,7 +2,6 @@ package com.my.travel.dao;
 
 import java.util.List;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +21,11 @@ public interface PicRepository extends JpaRepository<Pic, Integer> {
 	List<Pic> findAllBytripSightseeingIdtripSightseeing(int id);
 	List<Pic> findTop5ByTripSightseeingTripCityIdcities(int cityid);
 
-	        
+	Pic findOneBypicsAddr(String str);
+	List<Pic> findBypicsAddr(String str);
+	List<Pic> findBypicsAddrIn(List<String> str);
+	boolean existsBypicsAddr(String foo);
+	
+	List<Pic> findBypicsAddrContainingIgnoreCase(String name);
+	List<Pic> findBypicsAddrContaining(String subs);
 }

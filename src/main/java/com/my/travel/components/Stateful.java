@@ -1,12 +1,7 @@
 package com.my.travel.components;
 
-import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
-
-import org.springframework.stereotype.Component;
 
 import com.my.travel.model2.TripSightseeing;
 

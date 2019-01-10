@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
@@ -286,7 +287,7 @@ public class MainController {
 
 	@ModelAttribute("users")
 	public List<Traveler> getusers() {
-		return travelerRepository.findAll();
+		return travelerRepository.findAll().stream().filter(t->t.getTravelerBirthdate()!=null).collect(Collectors.toList());
 	}
 
 	@ModelAttribute("newtrip")

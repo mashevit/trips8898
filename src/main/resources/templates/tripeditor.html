@@ -51,7 +51,7 @@
 </style>
 
 <script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
-	<script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar"
 	data-offset="60">
@@ -64,21 +64,22 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#myPage">Logo</a>
+				<a class="navbar-brand" th:href="@{/web/main}">AllTrip</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#about">ABOUT</a></li>
-					<li><a href="#services">SERVICES</a></li>
-					<li><a href="#portfolio">PORTFOLIO</a></li>
-					<li><a href="#pricing">PRICING</a></li>
-					<li><a href="#contact">CONTACT</a></li>
+					<li><a href="#tripselect">SELECT TRIP</a></li>
+					<li><a href="#selectsight">SELECT SIGHT</a></li>
+					<li><a href="#addpics">ADDPICS</a></li>
+					<li><a href="#edit1">EDIT TRIP</a></li>
+					<li><a th:href="@{/web/edittrip}">EDIT TRIP PAGE</a></li>
+					<li><a th:href="@{/web/tripcity/all}">ALLTRIPS LINK LIST</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	<div class="jumbotron text-center">
+	<div id="tripselect" class="jumbotron text-center">
 		<h1>AllTrip</h1>
 		<p>Trip Editor</p>
 		<form th:action="@{/web/selecttrip}" th:object="${selectedTrOption}"
@@ -100,13 +101,17 @@
 	</div>
 
 	<!-- Container (About Section) -->
-	<div id="about" class="container-fluid">
+	<div id="selectsight" class="container-fluid">
 		<div class="row">
 
 			<div class="col-sm-4">
 				<h2>Select sight</h2>
 				<br>
-				<h4>In <span th:text="${session.requestedTrip.city.cityName}"></span> of the trip on <span th:text="${#dates.format(session.requestedTrip.tripDate, 'dd-MM-yyyy')}"></span></h4>
+				<h4>
+					In <span th:text="${session.requestedTrip.city.cityName}"></span>
+					of the trip on <span
+						th:text="${#dates.format(session.requestedTrip.tripDate, 'dd-MM-yyyy')}"></span>
+				</h4>
 				<br>
 				<form th:action="@{/web/selectsight}" th:object="${fooOption}"
 					class="form-inline" method="post" enctype="multipart/form-data">
@@ -149,8 +154,8 @@
     </ul>
   </div> -->
 					<br>
-					<button class="btn btn-default btn-lg"  name="action" value="slct" type="submit">select
-						sight</button>
+					<button class="btn btn-default btn-lg" name="action" value="slct"
+						type="submit">select sight</button>
 					<button type="submit" name="action" value="dltsight"
 						class="btn btn-default btn-lg">delete sight from trip</button>
 					<button type="submit" name="action" value="dltsightcity"
@@ -159,16 +164,22 @@
 				</form>
 			</div>
 
-			<form th:action="@{/web/addnewsight}" method="post" enctype="multipart/form-data">
+			<form th:action="@{/web/addnewsight}" method="post"
+				enctype="multipart/form-data">
 				<div class="col-sm-4">
 					<h2>Add sight</h2>
 					<br>
-					<h4>To the trip to <span th:text="${session.requestedTrip.city.cityName}"></span> on the <span th:text="${#dates.format(session.requestedTrip.tripDate, 'dd-MM-yyyy')}"></span></h4>
+					<h4>
+						To the trip to <span
+							th:text="${session.requestedTrip.city.cityName}"></span> on the <span
+							th:text="${#dates.format(session.requestedTrip.tripDate, 'dd-MM-yyyy')}"></span>
+					</h4>
 					<br>
 					<p>
 						<label for="nameofsight">sight</label> <input class="form-control"
-							id="nameofsight" name="nameofsight" placeholder="sight" type="text" required>
-						
+							id="nameofsight" name="nameofsight" placeholder="sight"
+							type="text" required>
+
 					</p>
 
 					<br>
@@ -182,7 +193,7 @@
 		</div>
 	</div>
 
-	<div class="container-fluid bg-grey">
+	<div class="container-fluid bg-grey" id="addpics">
 		<div class="row">
 			<div class="col-sm-4">
 				<span class="glyphicon glyphicon-globe logo slideanim"></span>
@@ -206,8 +217,10 @@
 					<button class="btn btn-default btn-link" id="clear">ClearList</button>
 					<button class="btn btn-default btn-link" id="forsitelist">listpicsforsite</button>
 					<button class="btn btn-default btn-link" id="listdata">ispresent</button>
-					<button class="btn btn-default btn-link" style="color: #f4511e !important;" id="tokenize">tokenize(;)</button>
-					<button class="btn btn-default btn-link" style="color: #f4511e !important;" id="clrtable">clrtable</button>
+					<button class="btn btn-default btn-link"
+						style="color: #f4511e !important;" id="tokenize">tokenize(;)</button>
+					<button class="btn btn-default btn-link"
+						style="color: #f4511e !important;" id="clrtable">clrtable</button>
 
 				</h4>
 			</div>
@@ -225,44 +238,40 @@
 			var trsiid1  = [[${session.requestedtrSight}]];
 			+]*/
 
-			
-			
-			
 			$("#forsitelist")
-			.click(
-					function() {
+					.click(
+							function() {
 
-						$
-								.ajax({
-									type : "GET",
-									url : "/web/check1",
-									data : {
-										"id" : trsiid1
-									},
-									success : function(data) {
-										var a = "<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>";
+								$
+										.ajax({
+											type : "GET",
+											url : "/web/check1",
+											data : {
+												"id" : trsiid1
+											},
+											success : function(data) {
+												var a = "<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>";
 
-										for (var i = 0; i < data.length; i++) {
-											var tds = '<tr><td>'
-													+ (i + 1)
-													+ '.</td><td> '
-													+ data[i].trs
-													+ "</td><td> "
-													+ data[i].addr
-													+ '</td><td><button class="btn btn-default btn-link" name="a" id="listdel" data-other-attr='
+												for (var i = 0; i < data.length; i++) {
+													var tds = '<tr><td>'
+															+ (i + 1)
+															+ '.</td><td> '
+															+ data[i].trs
+															+ "</td><td> "
+															+ data[i].addr
+															+ '</td><td><button class="btn btn-default btn-link" name="a" id="listdel" data-other-attr='
 													+ i
 													+ ' >remove</button></td></tr>';
 
-											a += tds
-										}
-										a += "</table>";
-										$('#tbl').html(a);
+													a += tds
+												}
+												a += "</table>";
+												$('#tbl').html(a);
 
-									}
-								});
+											}
+										});
 
-					});
-
+							});
 
 			/*]]>*/
 		</script>
@@ -314,7 +323,7 @@
 										});
 
 							});
-			
+
 			/*]]>*/
 		</script>
 
@@ -361,8 +370,7 @@
 										});
 
 							});
-			
-			
+
 			/*]]>*/
 		</script>
 
@@ -376,8 +384,6 @@
 			var user  = [[${session.requestedtrSight}]];
 			+]*/
 
-
-			
 			$("#add_new").click(function() {
 
 				$.ajax({
@@ -391,10 +397,7 @@
 					dataType : 'json'
 				});
 			});
-			
-			
-			
-			
+
 			$("#tokenize").click(function() {
 
 				$.ajax({
@@ -408,23 +411,18 @@
 					dataType : 'json'
 				});
 			});
-			
-			
-			
-			
-			
-			
-			$('body').on("click","#listdel" , function()  {
-				var q=$(this).attr('name');
-			var w=$(this).attr('data-other-attr');
+
+			$('body').on("click", "#listdel", function() {
+				var q = $(this).attr('name');
+				var w = $(this).attr('data-other-attr');
 				$.ajax({
 					url : '/web/removepic',
 					type : 'GET',
-					
-					data : {				
+
+					data : {
 						"name" : q,
 						"attr" : w
-				},
+					},
 				});
 			});
 			/*]]>*/
@@ -450,27 +448,28 @@
 					data : {
 						"id" : 1
 					}
-					
+
 				});
 			});
-			
-			$("#clrtable").click(function() {
-				var a="<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>";
-				$('#tbl').html(a);
-			});
-			
+
+			$("#clrtable")
+					.click(
+							function() {
+								var a = "<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>";
+								$('#tbl').html(a);
+							});
+
 			$("#sbmttodb").click(function() {
 
 				$.ajax({
 					url : '/web/dbsbmt',
 					type : 'GET',
 					data : {
-					
+
 					}
-					
+
 				});
 			});
-			
 
 			/*]]>*/
 		</script>
@@ -485,50 +484,47 @@
 			</div>
 			<div class="col-sm-6" id='tbl'></div>
 			<div class="col-sm-2">
-				<button class="btn btn-default btn-info" id="sbmttodb">submit to db</button>
+				<button class="btn btn-default btn-info" id="sbmttodb">submit
+					to db</button>
 			</div>
 		</div>
 	</div>
-	
-	
-	
-		<script th:inline="javascript">
-			/*<![CDATA[*/
-
-			/*[+
-
-			+]*/
 
 
-			
-			$("#sbmttodb").click(function() {
 
-				$.ajax({
-					url : '/web/dbsbmt',
-					type : 'GET',
-					data : {
-					
-					}
-					
-				});
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		/*[+
+
+		+]*/
+
+		$("#sbmttodb").click(function() {
+
+			$.ajax({
+				url : '/web/dbsbmt',
+				type : 'GET',
+				data : {
+
+				}
+
 			});
-			
+		});
 
-			/*]]>*/
-		</script>
+		/*]]>*/
+	</script>
 
 
 	<!-- Container (Services Section) -->
-	
-		<form th:action="@{/web/delcity}" 
-		class="form-inline" method="post" enctype="multipart/form-data" th:object="${City1}">
-		<div id="services" class="container-fluid text-center">
+
+
+		<div id="edit2" class="container-fluid text-center">
 			<h2>SERVICES</h2>
-			<h4>Delete City</h4>
+			<h4>Diff</h4>
 			<br>
 
 			<div class="row slideanim">
-<!-- 			<div class="col-sm-4">
+				<!-- 			<div class="col-sm-4">
 					<span class="glyphicon glyphicon-tower logo-small"></span>
 					<h4>Delete</h4>
 					<label for="Name2">hotel</label> <input type="text"
@@ -536,139 +532,162 @@
 
 				</div> -->
 
-				<div class="col-sm-4">
+				<div class="col-sm-6">
 
-
+	<form th:action="@{/web/delcity}" class="form-inline" method="post"
+		enctype="multipart/form-data" th:object="${City1}">
 					<span class="glyphicon glyphicon-tower logo-small"></span>
 					<h4>This</h4>
 
 					<label for="Inputselect">city</label>
 					<div class="input-group">
 						<div class="form-group blu-margin">
-							<select class="form-control" th:name="city"  th:value="city" th:field="*{cityName}" >
-								<option th:each="user : ${cities}" th:value="${user.idcities}" 
+							<select class="form-control" th:name="city" th:value="city"
+								th:field="*{cityName}">
+								<option th:each="user : ${cities}" th:value="${user.idcities}"
 									th:text="${user.cityName}"></option>
 							</select>
 						</div>
 
 
 					</div>
+						<div class="container-fluid text-center">
+				<button type="submit" class="btn btn-lg btn-danger">del city</button>
+			</div>
+					
+					</form>
 				</div>
-	
-				<div class="col-sm-8">
-					<span class="glyphicon glyphicon-tower logo-small"></span>
-				<h4>change travler</h4>
-						<label for="Name2">traveler</label> <input type="text"
-						class="form-control" id="budget" placeholder="enter money spent" />
 
+				<div class="col-sm-6">
+				<form th:action="@{/web/updatetrip1}"
+			class="form-inline" method="Post">
+					<span class="glyphicon glyphicon-tower logo-small"></span>
+					<h4>change traveller name</h4>
+					<label for="Name2">traveler</label>	<label for="Name2">name</label>
+					 <input type="text"
+							class="form-control"  id="name" name="name"
+							th:value="${requestedTrip.traveler.travelerName}"
+							placeholder="enter name" />
+	
+	<div class="container-fluid text-center">
+				<button type="submit" class="btn btn-lg btn-success">Submit
+					Information</button>
+			</div>
+</form>
 				</div>
 			</div>
-		<div class="container-fluid text-center">
-			<button type="submit" class="btn btn-lg btn-success">Submit
-				Information</button>
-		</div>
-
+		
 		</div>
 
 
-	</form>
+	
 
 
 
-<div>
+	<div>
 
 
 
 
-	<form th:action="@{/web/updatetrip}" th:object="${requestedTrip}"
-		class="form-inline" method="Post" enctype="multipart/form-data">
+		<form th:action="@{/web/updatetrip}" th:object="${requestedTrip}"
+			class="form-inline" method="Post" enctype="multipart/form-data">
 
-		<div id="services1" class="container-fluid text-center ">
-			<h2>SERVICES</h2>
-			<h4>add a trip</h4>
-			<br>
+			<div id="edit1" class="container-fluid text-center ">
+				<h2>SERVICES</h2>
+				<h4>add a trip</h4>
+				<br>
 
-			<div class="row slideanim">
-
-
-				<div class="col-sm-4">
+				<div class="row slideanim">
 
 
-					<span class="glyphicon glyphicon-tower logo-small"></span>
-					<h4>City</h4>
+					<div class="col-sm-4">
 
-					<label for="Inputselect">city</label>
-					<div class="input-group">
-						<div class="form-group blu-margin">
-							<select class="form-control"  th:field="*{city}">
-								<option th:each="user : ${cities}" th:value="${user.idcities}"
-									th:text="${user.cityName}" th:selected="${requestedTrip.city.idcities == user.idcities}"></option>
-							</select>
+
+						<span class="glyphicon glyphicon-tower logo-small"></span>
+						<h4>City</h4>
+
+						<label for="Inputselect">city</label>
+						<div class="input-group">
+							<div class="form-group blu-margin">
+								<select class="form-control" th:field="*{city}">
+									<option th:each="user : ${cities}" th:value="${user.idcities}"
+										th:text="${user.cityName}"
+										th:selected="${requestedTrip.city.idcities == user.idcities}"></option>
+								</select>
+							</div>
+
+
 						</div>
+					</div>
+					<div class="col-sm-4">
+						<span class="glyphicon glyphicon-glass logo-small"></span>
+						<h4>hotel</h4>
+						<label for="Name2">hotel</label> <input type="text"
+							class="form-control" id="hotel" placeholder="hotel name"
+							th:value="${requestedTrip.tripHotel}" th:field="*{tripHotel}" />
 
+					</div>
+					<div class="col-sm-4">
+						<span class="glyphicon glyphicon-euro logo-small"></span>
+						<h4>budget</h4>
+						<label for="Name2">budget</label> <input type="text"
+							class="form-control" id="budget"
+							th:value="${requestedTrip.tripMoneyspent}"
+							placeholder="enter money spent" th:field="*{tripMoneyspent}" />
 
 					</div>
 				</div>
-				<div class="col-sm-4">
-					<span class="glyphicon glyphicon-glass logo-small"></span>
-					<h4>hotel</h4>
-					<label for="Name2">hotel</label> <input type="text"
-						class="form-control" id="hotel" placeholder="hotel name" th:value="${requestedTrip.tripHotel}" th:field="*{tripHotel}"/>
+				<br /> <br />
+				<div class="row slideanim">
+					<div class="col-sm-4">
+						<span class="glyphicon glyphicon-time logo-small"></span>
+						<h4>date</h4>
+						<label for="Name2">date</label> <input type="date"
+							class="form-control" id="date"
+							th:value="${requestedTrip.tripDate}" th:placeholder="yyyy-mm-dd"
+							th:field="*{{tripDate}}" />
 
-				</div>
-				<div class="col-sm-4">
-					<span class="glyphicon glyphicon-euro logo-small"></span>
-					<h4>budget</h4>
-					<label for="Name2">budget</label> <input type="text"
-						class="form-control" id="budget"  th:value="${requestedTrip.tripMoneyspent}" placeholder="enter money spent" th:field="*{tripMoneyspent}"/>
+					</div>
+					<div class="col-sm-4">
+						<span class="glyphicon glyphicon-calendar logo-small"></span>
+						<h4>duration</h4>
+						<label for="Name2">number of days</label> <input type="text"
+							class="form-control" id="duration"
+							th:value="${requestedTrip.tripNumdays}"
+							placeholder="number of days" th:field="*{tripNumdays}" />
+
+					</div>
+					<div class="col-sm-4">
+						<span class="glyphicon glyphicon-road logo-small"></span>
+						<h4>transit time</h4>
+						<label for="Name2">transit time</label> <input type="text"
+							class="form-control" id="transit"
+							th:value="${requestedTrip.tripNummintransit}"
+							placeholder="enter transit time" th:field="*{tripNummintransit}" />
+					</div>
 
 				</div>
 			</div>
-			<br /> <br />
-			<div class="row slideanim">
-				<div class="col-sm-4">
-					<span class="glyphicon glyphicon-time logo-small"></span>
-					<h4>date</h4>
-					<label for="Name2">date</label> <input type="date"   
-						class="form-control" id="date" th:value="${requestedTrip.tripDate}" th:placeholder="yyyy-mm-dd" th:field="*{{tripDate}}"/>
 
-				</div>
-				<div class="col-sm-4">
-					<span class="glyphicon glyphicon-calendar logo-small"></span>
-					<h4>duration</h4>
-					<label for="Name2">number of days</label> <input type="text"
-						class="form-control" id="duration" th:value="${requestedTrip.tripNumdays}" placeholder="number of days" th:field="*{tripNumdays}"/>
-
-				</div>
-				<div class="col-sm-4">
-					<span class="glyphicon glyphicon-road logo-small"></span>
-					<h4>transit time</h4>
-					<label for="Name2">transit time</label> <input type="text"
-						class="form-control" id="transit" th:value="${requestedTrip.tripNummintransit}" placeholder="enter transit time" th:field="*{tripNummintransit}"/>
-				</div>
-
+			<div class="container-fluid text-center">
+				<button type="submit" class="btn btn-lg btn-success">Submit
+					Information</button>
 			</div>
-		</div>
+		</form>
 
-		<div class="container-fluid text-center">
-			<button type="submit" class="btn btn-lg btn-success">Submit
-				Information</button>
-		</div>
-	</form>
+		<form th:action="@{'/web/deltrip'}" th:object="${requestedTrip}"
+			class="form-inline" method="Post">
 
-	<form th:action="@{'/web/deltrip'}" th:object="${requestedTrip}"
-		class="form-inline" method="Post">
-
-		<div class="container-fluid text-center">
-			<button type="submit" class="btn btn-lg btn-danger">DELETE
-				TRIP</button>
-		</div>
-	</form>
+			<div class="container-fluid text-center">
+				<button type="submit" class="btn btn-lg btn-danger">DELETE
+					TRIP</button>
+			</div>
+		</form>
 
 
 
 
-</div>
+	</div>
 
 
 

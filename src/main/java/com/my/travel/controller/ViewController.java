@@ -2,6 +2,7 @@ package com.my.travel.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -76,6 +77,20 @@ public class ViewController {
 			    .boxed().collect(Collectors.toList()));  
 		if(isweb)
 		return "cityxplorer2";//"tsts";
+		
+		model.addAttribute("idpage", id);  
+		List<toCSview> ls =new ArrayList<toCSview>();
+		List<Trip> trlist=new ArrayList<Trip>();
+		Optional<Trip> tr =tripRepository.findById(id);
+		if(tr.isPresent())
+		trlist.add(tr.get());
+		//if(trlist.size()>1) return "redirect:/web/tripcity/lg/"+id;
+		System.out.println("dvdfd3333u");
+		int count=0;
+
+		count = lghelper(id, ls, trlist, count, 0);
+
+		model.addAttribute("csimgcontent", ls);  
 		return "Carousels";
 	}
 	
@@ -179,7 +194,7 @@ public class ViewController {
 	@RequestMapping(value = "/chng")
 	public String changeview(Model model, HttpSession session) {
 		isweb=!isweb;
-		return "redirect:/web/main";
+		return "redirect:/web/tripcity/all";
 		
 	}
 	
@@ -192,8 +207,32 @@ public class ViewController {
 		//if(trlist.size()>1) return "redirect:/web/tripcity/lg/"+id;
 		System.out.println("dvdfd3333u");
 		int count=0;
+		count = lgbighelp(id, ls, trlist, count);
+		model.addAttribute("csimgcontent", ls);  
+		if(!isweb)
+		return "Carousels";//"cityexplorer3";		//"tsts";
+		return "cityexplorer3";
+	}
+
+
+	private int lgbighelp(int id, List<toCSview> ls, List<Trip> trlist, int count) {
 		for(int i=0;i<trlist.size();i++) {
 			
+			toCSview cSview=new toCSview();
+			List<ToAndApp> tmpp = getpicslg(trlist.get(i).getIdtrip());
+			cSview.setContentlst(tmpp);
+			cSview.setIlst(IntStream.rangeClosed(count, tmpp.size()-1+count)
+				    .boxed().collect(Collectors.toList()));
+			cSview.setTrip(tripRepository.getOne(id));
+			cSview.setNum(count*30);
+			ls.add(cSview);
+			count=tmpp.size()+count;
+		}
+		return count;
+	}
+
+
+	private int lghelper(int id, List<toCSview> ls, List<Trip> trlist, int count, int i) {
 		toCSview cSview=new toCSview();
 		List<ToAndApp> tmpp = getpicslg(trlist.get(i).getIdtrip());
 		cSview.setContentlst(tmpp);
@@ -203,11 +242,7 @@ public class ViewController {
 		cSview.setNum(count*30);
 		ls.add(cSview);
 		count=tmpp.size()+count;
-		}
-		model.addAttribute("csimgcontent", ls);  
-		if(!isweb)
-		return "Carousels";//"cityexplorer3";		//"tsts";
-		return "cityexplorer3";
+		return count;
 	}
 	
 	

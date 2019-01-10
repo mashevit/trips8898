@@ -190,8 +190,8 @@ public class MultiHttpSecurityConfig {
 	                .usernameParameter("email")
 	                .passwordParameter("password")
 	                .and().logout()
-	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-	                .logoutSuccessUrl("/web").and().exceptionHandling()
+	                .logoutRequestMatcher(new AntPathRequestMatcher("/web/logout"))
+	                .logoutSuccessUrl("/web/login").and().exceptionHandling()
 	                .accessDeniedPage("/access-denied");
 	    }
 

@@ -30,15 +30,18 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">AllTrip</a>
+				<a class="navbar-brand" th:href="@{/web/tripcity/all}">AllTrip</a>
+				<a class="navbar-brand" th:href="@{/web/logout}">logout</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#about">ABOUT</a></li>
+					<li><a href="#main">ABOUT</a></li>
+					<li><a href="#generalinfo">GENERAL</a></li>
 					<li><a href="#services">SERVICES</a></li>
 					<li><a href="#portfolio">PORTFOLIO</a></li>
 					<li><a href="#pricing">PRICING</a></li>
 					<li><a href="#contact">CONTACT</a></li>
+
 				</ul>
 			</div>
 		</div>
@@ -66,7 +69,7 @@
 	</div>
 
 	<!-- Container (About Section) -->
-	<div class="container-fluid">
+	<div class="container-fluid" id="main">
 		<div class="row slideanim">
 			<div class="col-sm-4">
 				<h2>About This Site</h2>
@@ -96,7 +99,7 @@
 		</div>
 	</div>
 
-	<div id="about" class="container-fluid bg-grey">
+	<div id="generalinfo" class="container-fluid bg-grey">
 		<div class="row slideanim">
 			<div class="col-sm-4">
 				<span class="glyphicon glyphicon-globe logo"></span>

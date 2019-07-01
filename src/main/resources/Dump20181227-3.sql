@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `testschema` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `testschema`;
+CREATE DATABASE  IF NOT EXISTS `travel1` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `travel1`;
 
 --`travel1` /*!40100 DEFAULT CHARACTER SET utf8 */;
 --USE `travel1`;

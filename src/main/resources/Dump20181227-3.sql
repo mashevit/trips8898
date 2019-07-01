@@ -22,11 +22,11 @@ USE `travel1`;
 --
 -- Dumping data for table `car`
 --
-SET FOREIGN_KEY_CHECKS=0;
-LOCK TABLES `car` WRITE;
-/*!40000 ALTER TABLE `car` DISABLE KEYS */;
-/*!40000 ALTER TABLE `car` ENABLE KEYS */;
-UNLOCK TABLES;
+-- SET FOREIGN_KEY_CHECKS=0;
+-- LOCK TABLES `car` WRITE;
+-- /*!40000 ALTER TABLE `car` DISABLE KEYS */;
+-- /*!40000 ALTER TABLE `car` ENABLE KEYS */;
+-- UNLOCK TABLES;
 
 --
 -- Dumping data for table `cities`

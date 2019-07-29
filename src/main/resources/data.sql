@@ -1,3 +1,5 @@
 REPLACE INTO `role` VALUES (1,'ADMIN');
 REPLACE INTO `role` VALUES (2,'USER');
 REPLACE INTO `role` VALUES (3,'USER2');
+REPLACE INTO `Taveler` VALUES (1,'Ilia Mahsevitzky','1986-01-08');
+REPLACE INTO `Taveler` VALUES (2,'Trav Aller','1985-08-08');
